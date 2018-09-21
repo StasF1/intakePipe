@@ -14,12 +14,12 @@ In the directory `postProcessing` run Main.m to calculate flow coeffiecient of i
 In result we have got set of plots and one from them is a plot with flow coefficent for 3 versions of intake pipes:
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu.png)
 
-### Block diagramm of the algorythm
+### Block diagramm of the algorythm: [TRANSLATION IN PROGRESS]
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/blockDiagram.png)
 
 # Compilation another pipe geometry
 
-[IN PROCESS]
+[IN PROGRESS]
 
 #### In case if you need to recompilate smth:
 - for whole stroke – run a solveCurrentStroke.sh script in the `CFDOpenFOAM/<stroke>/`
