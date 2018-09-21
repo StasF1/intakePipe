@@ -18,7 +18,7 @@ In result we have got set of plots and one from them is a plot with flow coeffic
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/blockDiagram.png)
 
 # Compilation another pipe geometry [IN PROGRESS]
-\
+
 #### In case if you need to recompilate smth:
 - for whole stroke – run a solveCurrentStroke.sh script in the `CFDOpenFOAM/<stroke>/`
 - for only mesh – run a remesh.sh or hardRemesh.sh script in the `CFDOpenFOAM/<stroke>/mesh/`
