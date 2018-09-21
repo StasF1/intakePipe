@@ -3,6 +3,8 @@ Calculates flow coefficient for intake pipe. Also can compare different forms of
 
 # Compilation
 ## CFD or OpenFOAM part
+Directory CFDOpenFOAM/ has got three different versions of geometry. To start complilation in any version run a solveProject.sh script (in the script you can change initial and finite strokes).\
+Every folder version has got a 0/ folder in which the normal OpenFOAM folders archived ( case/ , geometry/ , mesh/ ). In the 0/geometry/ .stl files located. Script copies the 0/ directory, moves the valve for the new stroke, generates the mesh and solves the case for that stroke with 1 mm step. Every stroke will have its case folder CFDOpenFOAM/<stroke>/.
 
 
 ### Block diagramm of the algorythm
