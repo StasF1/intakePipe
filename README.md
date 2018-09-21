@@ -17,9 +17,11 @@ In result we have got set of plots and one from them is a plot with flow coeffic
 ### Block diagramm of the algorythm: [TRANSLATION IN PROGRESS]
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/blockDiagram.png)
 
-# Compilation another pipe geometry
+# Compilation another pipe geometry [IN PROGRESS]
 
-[IN PROGRESS]
+/
+/
+/
 
 #### In case if you need to recompilate smth:
 - for whole stroke – run a solveCurrentStroke.sh script in the `CFDOpenFOAM/<stroke>/`
