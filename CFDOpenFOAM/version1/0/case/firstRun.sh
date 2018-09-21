@@ -12,4 +12,6 @@
 # Копирование файлов сетки
 cp -r ../mesh/constant/polyMesh constant
 
-sh simpleFOAM.sh
+simpleFoam
+postProcess -func "patchAverage(p,name=inlet)" -latestTime
+echo -ne '\007'
