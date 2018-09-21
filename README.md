@@ -12,7 +12,7 @@ In the directory `postProcessing` run Main.m to calculate flow coeffiecient of i
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/threeCones.png)
 
 In result we have got a plot with flow coefficent for 3 versions of intake pipes:
-![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu1.png)
+![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu.png)
 
 ### Block diagramm of the algorythm
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/blockDiagram.png)
