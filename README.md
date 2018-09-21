@@ -19,9 +19,9 @@ In result we have got set of plots and one from them is a plot with flow coeffic
 
 # Compilation another pipe geometry [IN PROGRESS]
 
-/
-/
-/
+\
+\
+\
 
 #### In case if you need to recompilate smth:
 - for whole stroke – run a solveCurrentStroke.sh script in the `CFDOpenFOAM/<stroke>/`
