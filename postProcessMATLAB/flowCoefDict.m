@@ -28,15 +28,15 @@ strokeStart = 3; % mm, initial valve stroke
 strokeEnd = 14; % mm, final valve stroke
 strokeDelta = 1; % mm, stroke step
 
-%% Pipe geometry
-d_pipe = 25.688; % mm, the minimum diameter of intake pipe
-d_2Pipe = 29.756; % mm, chamfer diameter of valve neck
+%% Pipe geometry (watch the picture)
+d_pipe = 25.688; % mm, the minimum diameter of intake pipe (or diameter for the A point)
+d_2Pipe = 29.756; % mm, chamfer diameter of valve neck (or diameter for the A1 point)
 
-%% Valve geometry
-d_bar = 6.96; % mm, bar diameter
-d_1 = 26.782; % mm, valve diameter
-d_2 = 29.206; % mm, head valve diameter
-teta = 45; % chamfer angle
+%% Valve geometry (watch the picture)
+d_bar = 6.96; % mm, bar diameter ( d_c )
+d_1 = 26.782; % mm, valve diameter ( d_1 )
+d_2 = 29.206; % mm, head valve diameter ( d_2 )
+teta = 45; % valve chamfer angle
 
 
 
