@@ -8,7 +8,8 @@ Every folder version has got a `0/` folder in which the normal OpenFOAM folders 
 
 ## postProcessing or MATLAB part
 The solveProject.sh script stroke makes inletPatchPressures.txt file with inlet patch pressures for every stoke.
-In the directory `postProcessing`
+In the directory `postProcessing` run Main.m to calculate flow coeffiecient of intake pipe. It also considers three versions of minimal flow area (from I to III) or even if it is in the pipe (d_2).
+![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/threeCones.png)
 
 ### Block diagramm of the algorythm
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/blockDiagram.png)
@@ -18,8 +19,8 @@ In the directory `postProcessing`
 [IN PROCESS]
 
 #### In case if you need to recompilate smth:
-- whole stroke – run a solveCurrentStroke.sh script in the `CFDOpenFOAM/<stroke>/`
-- only mesh – run a remesh.sh or hardRemesh.sh script in the `CFDOpenFOAM/<stroke>/mesh/`
-- only case – run a hardRerun.sh script in the `CFDOpenFOAM/<stroke>/mesh/`
+- for whole stroke – run a solveCurrentStroke.sh script in the `CFDOpenFOAM/<stroke>/`
+- for only mesh – run a remesh.sh or hardRemesh.sh script in the `CFDOpenFOAM/<stroke>/mesh/`
+- for only case – run a hardRerun.sh script in the `CFDOpenFOAM/<stroke>/mesh/`
 
 hardRemesh.sh deletes all files of mesh and remakes them from `0/geometry`
