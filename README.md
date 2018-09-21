@@ -21,7 +21,6 @@ In result we have got set of plots and one from them is a plot with flow coeffic
 
 \
 \
-\
 
 #### In case if you need to recompilate smth:
 - for whole stroke – run a solveCurrentStroke.sh script in the `CFDOpenFOAM/<stroke>/`
