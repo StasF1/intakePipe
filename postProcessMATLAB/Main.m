@@ -80,7 +80,7 @@ figure; hold on;
 plot(h/d_pipe, muVer1, 'LineWidth', 5); grid on;
 plot(h/d_pipe, muVer2, 'g', 'LineWidth', 5);
 plot(h/d_pipe, muVer3, 'r', 'LineWidth', 5);
-xlabel('h/d_г, mm'); ylabel('\mu'); set(gca,'fontsize', 20);
+xlabel('h/d_г'); ylabel('\mu'); set(gca,'fontsize', 20);
 legend('Version 1', 'Version 2', 'Version 3');
 saveas(gcf, 'mu.png');
 
@@ -88,7 +88,7 @@ figure; hold on;
 plot(h/d_pipe, mufVer1*1e+04, 'LineWidth', 5); grid on;
 plot(h/d_pipe, mufVer2*1e+04, 'g', 'LineWidth', 5);
 plot(h/d_pipe, mufVer3*1e+04, 'r', 'LineWidth', 5);
-xlabel('h/d_г, mm'); ylabel('\muf, cm^2'); set(gca,'fontsize', 20);
+xlabel('h/d_г'); ylabel('\muf, cm^2'); set(gca,'fontsize', 20);
 ylim([0, max(mufVer3)*1e+04]+0.1);
 legend('Version 1', 'Version 2', 'Version 3', 'Location', 'southeast'); 
 saveas(gcf, 'muf.png');
