@@ -4,11 +4,11 @@
 
 % Path to inlet pressures file
 pathToDataVer1 =...
-    '~/Downloads/intakePipe-master/version1/inletPatchPressures.txt';
-% pathToDataVer2 =...
-%     '~/Downloads/intakePipe-master/version2/inletPatchPressures.txt';
-% pathToDataVer3 =...
-%     '~/Downloads/intakePipe-master/version3/inletPatchPressures.txt';
+    '~/Downloads/intakePipe-master/version1/CFDOpenFOAM/inletPatchPressures.txt';
+pathToDataVer2 =...
+    '~/Downloads/intakePipe-master/version2/CFDOpenFOAM/inletPatchPressures.txt';
+pathToDataVer3 =...
+    '~/Downloads/intakePipe-master/version3/CFDOpenFOAM/inletPatchPressures.txt';
 
 % Path to save the results (to save to the current folder set 0)
 pathToSave = 0; %'~/Downloads/intakePipe/Results/';
