@@ -11,7 +11,7 @@ The solveProject.sh script stroke makes inletPatchPressures.txt file with inlet 
 In the directory `postProcessing` run Main.m to calculate flow coeffiecient of intake pipe. It also considers three versions of minimal flow area (from I to III) or even if it is in the pipe (d_2).
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/threeCones.png)
 
-In result we have got set of plots and one it is a plot with flow coefficent for 3 versions of intake pipes:
+In result we have got set of plots and one from them is a plot with flow coefficent for 3 versions of intake pipes:
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu.png)
 
 ### Block diagramm of the algorythm
