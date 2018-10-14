@@ -22,6 +22,6 @@ In result we have got set of plots and one from them is a plot with flow coeffic
 #### In case if you need to recompilate smth:
 - for whole stroke – run a solveCurrentStroke.sh script in the `CFDOpenFOAM/<stroke>/`
 - for only mesh – run a remesh.sh or hardRemesh.sh script in the `CFDOpenFOAM/<stroke>/mesh/`
-- for only case – run a hardRerun.sh script in the `CFDOpenFOAM/<stroke>/mesh/`
+- for only case – run a hardRerun.sh script in the `CFDOpenFOAM/<stroke>/case/`
 
 hardRemesh.sh deletes all files of mesh and remakes them from `0/geometry`
