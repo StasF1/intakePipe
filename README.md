@@ -27,10 +27,10 @@ In result we have got set of plots and one from them is a plot with flow coeffic
 # Compilation another pipe geometry
 ## CFD or OpenFOAM part
 1. **Geometry files:**
-
-  1. To recompilate any other pipe geometry make new folder (by copying existing `version#/`) to directory `calculation/`. 
-  2. In the `STLs` put geometry files of the new pipe, which it **must** be splitted for four parts: *inlet.stl*, *outlet.stl*, *valve.stl*, *walls.stl*.
-  3. Valve **must** be closed! Script moves it later automaticaly.
+  
+    1. To recompilate any other pipe geometry make new folder (by copying existing `version#/`) to directory `calculation/`. 
+    2. In the `STLs` put geometry files of the new pipe, which it **must** be splitted for four parts: *inlet.stl*, *outlet.stl*, *valve.stl*, *walls.stl*.
+    3. Valve **must** be closed! Script moves it later automaticaly.
 
 2. **Mesh:**
     In `<yourVersion>/0/mesh/system/` for new dimensions of the pipe change:
