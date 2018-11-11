@@ -14,7 +14,7 @@ Because main script runs the others if you need to recompilate something you do 
 - only mesh for the certain stroke – run a *remesh.sh* or *hardRemesh.sh* script in the `calculation/<stroke>/mesh/` (_hardRemesh.sh_ deletes all mesh files and remakes them from `0/geometry`)
 - only case for the certain stroke – run a *hardRerun.sh* script in the `calculation/<stroke>/case/`
 
-#postProcessing
+# postProcessing
 
 ## MATLAB
 The *solveProject.sh* script makes *inletPatchPressures.txt* file  in `version#/` directory with inlet patch pressures for every stoke.
