@@ -48,8 +48,8 @@ do
 	tail -n1 surfaceFieldValue.dat >> ../../../../../inletPatchPressures.txt
 	cd ../../../../../
 	
-	# Сохранение времени расчёта подпроекта в project.log
-	printf '\nStroke %s mm has being SOLVED in ' $stroke
+	# Отображение времени расчёта подпроекта
+	printf '\n Stroke %s mm has being SOLVED in ' $stroke
 	endStrokeTime=`date +%s`
 	solveStrokeTime=$((endStrokeTime-startStrokeTime))
 	printf '%dh:%dm:%ds\n\n'\

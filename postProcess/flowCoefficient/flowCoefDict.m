@@ -1,14 +1,13 @@
 % Data of intake pipe & gas 
 
 %% Directories
-
 % Path to inlet pressures file
 pathToDataVer1 =...
-    '~/Downloads/intakePipe-master/version1/CFDOpenFOAM/inletPatchPressures.txt';
+    '~/Downloads/intakePipe-master/version1/calculation/inletPatchPressures.txt';
 pathToDataVer2 =...
-    '~/Downloads/intakePipe-master/version2/CFDOpenFOAM/inletPatchPressures.txt';
+    '~/Downloads/intakePipe-master/version2/calculation/inletPatchPressures.txt';
 pathToDataVer3 =...
-    '~/Downloads/intakePipe-master/version3/CFDOpenFOAM/inletPatchPressures.txt';
+    '~/Downloads/intakePipe-master/version3/calculation/inletPatchPressures.txt';
 
 % Path to save the results (to save to the current folder set 0)
 pathToSave = 0; %'~/Downloads/intakePipe/Results/';
@@ -26,7 +25,7 @@ p_atm = 101325; % Pa, atmospheric pressure
 %% Stroke
 strokeStart = 3; % mm, initial valve stroke
 strokeEnd = 14; % mm, final valve stroke
-strokeDelta = 1; % mm, stroke step
+strokeDelta = 1; % mm, pitch for strokes
 
 %% Pipe geometry (watch the picture)
 d_pipe = 25.688; % mm, the minimum diameter of intake pipe (or diameter for the A point)

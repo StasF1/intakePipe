@@ -9,6 +9,7 @@ Directory `calculation/` has got three different versions of the geometry. To st
 The script *solveProject.sh* copies the `0/` directory, moves the valve for the new stroke, generates the mesh and solves the case for that stroke with 1 mm step. Every stroke will have its case folder `CFDOpenFOAM/<stroke>/`.
 
 #### In case if you need to recompilate smth:
+
 Because main script runs the others if you need to recompilate something you do not need to rerun the whole project. So, if you need to recompilate:
 - all calculations for the certain stroke – run a *solveCurrentStroke.sh* script in the `calculation/<stroke>/`
 - only mesh for the certain stroke – run a *remesh.sh* or *hardRemesh.sh* script in the `calculation/<stroke>/mesh/` (_hardRemesh.sh_ deletes all mesh files and remakes them from `0/geometry`)
@@ -17,6 +18,7 @@ Because main script runs the others if you need to recompilate something you do 
 # postProcessing
 
 ## MATLAB
+
 The *solveProject.sh* script makes *inletPatchPressures.txt* file  in `version#/` directory with inlet patch pressures for every stoke.
 In the directory `postProcessing/flowCoefficient/` run *Main.m* to calculate flow coeffiecient of intake pipe. It also considers three versions of minimal flow area (from I to III on the picture) or even if it is moves to the *d_2* diameter of the pipe.
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/threeCones.png)
@@ -25,9 +27,11 @@ In result we have got set of plots and one from them is a plot with flow coeffic
 ![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu.png)
 
 # Compilation another pipe geometry
+
 ## CFD or OpenFOAM part
+
 1. **Geometry files:**
-  
+
     1. To recompilate any other pipe geometry make new folder (by copying existing `version#/`) to directory `calculation/`. 
     2. In the `STLs` put geometry files of the new pipe, which it **must** be splitted for four parts: *inlet.stl*, *outlet.stl*, *valve.stl*, *walls.stl*.
     3. Valve **must** be closed! Script moves it later automaticaly.
@@ -53,6 +57,16 @@ In result we have got set of plots and one from them is a plot with flow coeffic
     - `strokeStart` - stroke of initial calculation (**only int type!**)
     - `strokeEnd` - stroke of finite calculation (**only int type!**)
     - `strokeDelta` - pitch for strokes (**only int type!**)
+
+# postProcessing
+
+## MATLAB
+
+- In _flowCoefDict.m_ change values for your calculation
+- If it is only one version of the pipe comment two others in _Main.py_
+- run _Main.py_ script
+
+
 
 
 
