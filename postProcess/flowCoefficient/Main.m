@@ -1,10 +1,11 @@
 % Calculates flow coefficient for different valve strokes
-clc; projectFolder = pwd;
+projectFolder = pwd;
 flowCoefDict;
 
 %% Initialising arrays
 h = ((strokeStart:strokeDelta:strokeEnd)*1e-03).';
 f_valve = zeros(length(h), 1);      p_delta = zeros(length(h), 1);
+
 mufVer1 = zeros(length(h), 1);
 mufVer2 = zeros(length(h), 1);
 mufVer3 = zeros(length(h), 1);
@@ -14,13 +15,14 @@ mufVer3 = zeros(length(h), 1);
 d_pipe = d_pipe*1e-03;		d_2Pipe = d_2Pipe*1e-03;
 d_1 = d_1*1e-03;			d_2 = d_2*1e-03;            d_bar = d_bar*1e-03;
 
-p_inletVer1 = importdata( pathToDataVer1 ); % m^2/s^2, importing data for version one
-p_inletVer2 = importdata( pathToDataVer2 ); % m^2/s^2, importing data for version two
-p_inletVer3 = importdata( pathToDataVer3 ); % m^2/s^2, importing data for version three
-
+for i = 1:length(numberOfProjects)
+    p_inletVer1 = importdata( pathToDataVer1 ); % m^2/s^2, importing data for version one
+    p_inletVer2 = importdata( pathToDataVer2 ); % m^2/s^2, importing data for version two
+    p_inletVer3 = importdata( pathToDataVer3 ); % m^2/s^2, importing data for version three
+end
 
 %% Calculating minimal area of intake
-fid = fopen('cutNumberForStroke.txt', 'w'); fprintf(fid, 'Stroke, mm       Cut №\n');
+fid = fopen('cutNumberForStroke.log', 'w'); fprintf(fid, 'Stroke, mm       Cut №\n');
 
 h_crI = (d_pipe - d_1)/sind(2*teta);      h_crII = (d_2Pipe - d_1)/sind(2*teta);
 
@@ -93,7 +95,7 @@ ylim([0, max(mufVer3)*1e+04]+0.1);
 legend('Version 1', 'Version 2', 'Version 3', 'Location', 'southeast'); 
 saveas(gcf, 'muf.png');
 
-fclose(fid); type('cutNumberForStroke.txt');
+fclose(fid); type('cutNumberForStroke.log');
 
 %% Moving results to the results folder
 if isa(pathToSave, 'double') == 1 % Saving the results to the folder in current directory
@@ -103,7 +105,7 @@ if isa(pathToSave, 'double') == 1 % Saving the results to the folder in current 
     movefile('valveArea.png', 'flowCoefficient.Results/');
     movefile('muf.png', 'flowCoefficient.Results/');
     movefile('mu.png', 'flowCoefficient.Results/');
-    movefile('cutNumberForStroke.txt', 'flowCoefficient.Results/');
+    movefile('cutNumberForStroke.log', 'flowCoefficient.Results/');
     
 else % Saving the results to the folder in setted directory
     copyfile('flowCoefDict.m', pathToSave);
@@ -111,7 +113,7 @@ else % Saving the results to the folder in setted directory
     movefile('valveArea.png', pathToSave);
     movefile('muf.png', pathToSave);
     movefile('mu.png', pathToSave);
-    movefile('cutNumberForStroke.txt', pathToSave);
+    movefile('cutNumberForStroke.log', pathToSave);
     
     cd(pathToSave); mkdir('flowCoefficient.Results');
     movefile('flowCoefDict.m', 'flowCoefficient.Results/');
@@ -119,7 +121,7 @@ else % Saving the results to the folder in setted directory
     movefile('valveArea.png', 'flowCoefficient.Results/');
     movefile('muf.png', 'flowCoefficient.Results/');
     movefile('mu.png', 'flowCoefficient.Results/');
-    movefile('cutNumberForStroke.txt', 'flowCoefficient.Results/');
+    movefile('cutNumberForStroke.log', 'flowCoefficient.Results/');
     
     cd(projectFolder);
 
