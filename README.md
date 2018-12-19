@@ -7,9 +7,9 @@ The purpose of this work was to create a method for determining the characterist
 
 # CFD or OpenFOAM part
 
-Directory `calculation/` has got three different versions of the geometry. To start compilation in any version run a *solveProject.sh* script (in the script you can change initial and finite strokes). Every folder version has got a `0/` folder in which the normal OpenFOAM folders archived ( `case/` , `geometry/` , `mesh/` ) and the `STLs/` , where *.stl* files located. 
+Directory `calculation/` has got three different versions of the geometry. In the *intakePipeDict.sh* you can set some settings of compilation (initial and finite strokes or calculation step). To start compilation run a *solveProject.sh* script in the `version#` . Every folder version has got a `0/` folder in which the normal OpenFOAM folders archived ( `case/` , `geometry/` , `mesh/` ) and the `STLs/` , where *.stl* files located.
 
-The script *solveProject.sh* copies the `0/` directory, moves the valve for the new stroke, generates the mesh and solves the case for that stroke with 1 mm step. Every stroke will have its case folder `CFDOpenFOAM/<stroke>/`.
+The script *solveProject.sh* copies the `0/` directory, moves the valve for the new stroke, generates the mesh and solves the case for that stroke with step. Every stroke will have its case folder `calculation/version#/<stroke>/`.
 
 **Before run** the script open ParaView and load the state *caseState.pvsm* from `version#/0/case/` with ''`Load State...`''. Select *Swirl number* filter and change path to the *swirlNumberFilter.py* (the path **must** be **full**!), which is placed in `postProcess/` directoty. Save *caseState.pvsm* replacing the original one with the ''`Save State...`''.
 

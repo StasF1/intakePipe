@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #-----------------------------------------------------------------------------#
 # =========                 |
 # \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
@@ -21,24 +21,27 @@
 #     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Script
-#     solveProject
+#     intakePipeDict
 #
 # Description
-#     Скрипт для регенерации сетки c помощью утилиты snappyHexMesh
+#     Словарь-скрипт для задания настроек хода клапана
 #
 #------------------------------------------------------------------------------
 
-# Перезапись .stl файлов в /mesh/constant/triSurface/
-cd ../mesh/
-rm -r constant/extendedFeatureEdgeMesh
-rm -r constant/triSurface/*
-cp ../geometry/*.stl constant/triSurface
-surfaceFeatureExtract
+strokeStart=12 # mm, первый ход клапана
 
-# Регенерация сетки
-rm -r constant/polyMesh
-blockMesh | tee mesh.log
-snappyHexMesh -overwrite | tee -a mesh.log
-echo -ne '\007' # paraview foam.foam &
+strokeEnd=12   # mm, последний ход клапана
+
+strokeDelta=1  # mm, шаг хода клапана (допустимы целые значения)
 
 # ***************************************************************************** #
+
+
+
+
+
+
+
+
+
+

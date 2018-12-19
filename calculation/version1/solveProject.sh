@@ -1,17 +1,36 @@
 #!/bin/bash
-# Решение проекта с увеличением хода клапана на шаг
+#-----------------------------------------------------------------------------#
+# =========                 |
+# \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+#  \\    /   O peration     | Website:  https://github.com/StasF1/intakePipe
+#   \\  /    A nd           | Version:  6
+#    \\/     M anipulation  |
+#------------------------------------------------------------------------------
+# License
+#     This program is free software: you can redistribute it and/or modify it
+#     under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     This program is distributed in the hope that it will be useful, but
+#     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+#     or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+#     for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Script
+#     solveProject
+#
+# Description
+#     Решение проекта с увеличением хода клапана на шаг
+#
+#------------------------------------------------------------------------------
 
-# ------------------------------------- Data ------------------------------------- #
+source ../intakePipeDict.sh
 
-# Задание хода клапана
-strokeStart=4 # mm, первый ход клапана
-strokeEnd=8 # mm, последний ход клапана
-strokeDelta=1 # mm, шаг хода клапана (допустимы значения кратные одному милимметру)
-
-# -------------------------------------------------------------------------------- #
-
-
-# [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[ Script ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] #
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * #
 
 startProjectTime=`date +%s` # Включение секундомера для вывода времени расчёта
 
@@ -66,7 +85,10 @@ solveProjectTime=$((endProjectTime-startProjectTime))
 printf '#######################\n'
 printf 'Solve time: %dh:%dm:%ds\n'\
 	 $(($solveProjectTime/3600)) $(($solveProjectTime%3600/60)) $(($solveProjectTime%60))
+
 echo -ne '\007' # звуковой сигнал
+
+# ***************************************************************************** #
 
 
 
