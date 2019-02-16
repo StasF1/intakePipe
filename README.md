@@ -35,48 +35,4 @@ In result we have got set of plots and one from them is a plot with flow coeffic
 
 Every `version#/#/case` folder has got a *caseState.pvsm* file when you open it in the ParaView with ''`Load State...`'' it calculates swirl numbers in the cylinder automatically.
 
-# Compilation another pipe geometry
-
-## CFD or OpenFOAM part
-
-1. **Geometry files:**
-
-    1. To recompilate any other pipe geometry make new folder (by copying existing `version#/`) to directory `calculation/`. 
-    2. In the `STLs` put geometry files of the new pipe, which it **must** be splitted for four parts: *inlet.stl*, *outlet.stl*, *valve.stl*, *walls.stl*.
-    3. Valve **must** be closed! Script moves it later automaticaly.
-
-2. **Mesh:**
-    In `<yourVersion>/0/mesh/system/` for new dimensions of the pipe change:
-
-    1. Parameters of the _blockMeshDict_ .
-    2. Parameters of the _snappyHexMeshDict_:
-     - *line 63*: set `radius` for the radius of the valve
-     - *line 105*: in `features` change refinement level nearby walls
-     - _line 139_: in `refinementSurfaces` change refinement levels
-     - _line 202_: set `locationInMesh` anywhere **inside** pipe geometry
-     - _line 252_: in `addLayersControls` change refinement parameters
-
-3. **Boundary condtions:**
-    In `<yourVersion>/0/case/0/` for new dimensions of the pipe change boundary conditions in files: *p*, *U*, *epsilon*, *k*
-
-4. **Set number of strokes:**
-
-    In `<yourVersion>/` **open** script  *solveProject.sh* and set:
-
-    - `strokeStart` - stroke of initial calculation (**only int type!**)
-    - `strokeEnd` - stroke of finite calculation (**only int type!**)
-    - `strokeDelta` - pitch for strokes (**only int type!**)
-
-# postProcessing
-
-## MATLAB
-
-- In _flowCoefDict.m_ change values for your calculation
-- If it is only one version of the pipe comment two others in _Main.py_
-- run _Main.py_ script
-
-## Paraview
-
-- Change data in *swirlNumberFilter.py*
-
-- Every `version#/#/case` folder has got a *caseState.pvsm* file when you open it in the ParaView with "`Load State...`" it calculates swirl numbers in the cylinder automatically. But a swirl numbers plot of one version of geometry you have to make manually. **_¯\\(ツ)/¯_**
+# [Compilation another pipe geometry](https://github.com/StasF1/intakePipe/wiki/Compilation-another-pipe-geometry)
