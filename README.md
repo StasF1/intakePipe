@@ -39,4 +39,4 @@ Every `version#/#/case` folder has got a *caseState.pvsm* file when you open it 
 
 
 
-# [Compilation another pipe geometry](https://github.com/StasF1/intakePipe/wiki/Compilation-another-pipe-geometry)
+# [Compilation another pipe geometry](https://github.com/StasF1/intakePipe/wiki/Home)
