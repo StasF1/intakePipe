@@ -39,6 +39,6 @@ cp ../geometry/*.stl constant/triSurface
 surfaceFeatureExtract | tee mesh.log
 blockMesh | tee -a mesh.log
 snappyHexMesh -overwrite | tee -a mesh.log
-echo -ne '\007' # paraview mesh.foam &
+echo '\007' # paraview mesh.foam &
 
 # ***************************************************************************** #

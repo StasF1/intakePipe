@@ -34,6 +34,6 @@ cp -r ../mesh/constant/polyMesh constant
 # Запуск расчёта
 simpleFoam | tee case.log
 postProcess -func "patchAverage(p,name=inlet)" -latestTime | tee -a case.log
-echo -ne '\007'
+echo '\007'
 
 # ***************************************************************************** #
