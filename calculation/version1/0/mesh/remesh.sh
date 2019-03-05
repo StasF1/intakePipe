@@ -39,6 +39,6 @@ surfaceFeatureExtract
 rm -r constant/polyMesh
 blockMesh | tee mesh.log
 snappyHexMesh -overwrite | tee -a mesh.log
-echo '\007' # paraview foam.foam &
+echo -ne '\007' # paraview foam.foam &
 
 # ***************************************************************************** #
