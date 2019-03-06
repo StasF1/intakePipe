@@ -21,10 +21,10 @@
 #     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Script
-#     solveProject
+#     solveVersion
 #
 # Description
-#     Решение проекта с увеличением хода клапана на шаг
+#     Решение варианта проекта с увеличением хода клапана на шаг
 #
 #------------------------------------------------------------------------------
 
@@ -32,25 +32,20 @@ source ../intakePipeDict.sh
 
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * #
 
-startProjectTime=`date +%s` # Включение секундомера для вывода времени расчёта
+startVersionTime=`date +%s` # Включение секундомера для вывода времени расчёта
 
 ## Масштабирование файлов .stl
-printf 'Scaling *.stl files...\n'
 cd 0/geometry
-sh scaleSTL.sh > scaleSTL.log 
-printf '\nScaling *.stl files has being DONE.'
-printf '\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n'
+printf 'Running surfaceTransformPoints (scaling .stl files) on %s\n' ${PWD}
+sh scaleSTL.sh > scaleSTL.log
 cd ../../
 
 ## Создание и решение подпроектов по шагу клапана
-printf 'Solving cases by stokes:\n'
-
 # Создание файла давлений на входном сечении по шагам клапана
 printf '# Time       	average(p)\n' > inletPatchPressures.txt
 stroke=$strokeStart
 while [ $stroke -le $strokeEnd ]
 do
-	printf 'Solving stroke = %s mm:\n' $stroke
 	startStrokeTime=`date +%s` # Включение секундомера для вывода времени расчёта подпроекта
 	strokeMetres=`echo "scale=3; $stroke*10^(-3)" | bc -l` # Сonverting stroke to metres
 	
@@ -68,24 +63,19 @@ do
 	cd ../../../../../
 	
 	# Отображение времени расчёта подпроекта
-	printf '\n Stroke %s mm has being SOLVED in ' $stroke
 	endStrokeTime=`date +%s`
-	solveStrokeTime=$((endStrokeTime-startStrokeTime))
-	printf '%dh:%dm:%ds\n\n'\
-		 $(($solveStrokeTime/3600)) $(($solveStrokeTime%3600/60)) $(($solveStrokeTime%60))
+	strokeTime=$((endStrokeTime-startStrokeTime))
+	printf '   Stroke %s mm has being solved in %dh:%dm:%ds\n' $stroke\
+		 $(($strokeTime/3600)) $(($strokeTime%3600/60)) $(($strokeTime%60))
 
 	stroke=`echo "scale=1; $stroke + $strokeDelta" |bc` # Inreasing stroke by one step
 done
-printf '\nThe project has being SOLVED.'
-printf '\n~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n'
 
-# Отображение времени расчёта проекта
-endProjectTime=`date +%s`
-solveProjectTime=$((endProjectTime-startProjectTime))
-printf '#######################\n'
-printf 'Solve time: %dh:%dm:%ds\n'\
-	 $(($solveProjectTime/3600)) $(($solveProjectTime%3600/60)) $(($solveProjectTime%60))
-
+# Отображение времени расчёта версии
+endVersionTime=`date +%s`
+versionTime=$((endVersionTime-startVersionTime))
+printf '   All srokes have being solved in %dh:%dm:%ds\n'\
+	 $(($versionTime/3600)) $(($versionTime%3600/60)) $(($versionTime%60))
 echo -ne '\007' # звуковой сигнал
 
 # ***************************************************************************** #

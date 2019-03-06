@@ -24,7 +24,7 @@
 #     Allrun
 #
 # Description
-#     Cкрипт запускающий расчёт для всех вариентов клапана
+#     Cкрипт запускающий расчёт для всех вариантов геометрии канала
 #
 #------------------------------------------------------------------------------
 
@@ -32,13 +32,28 @@ source intakePipeDict.sh
 
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * #
 
-verNo=1
-while [ $verNo -le $versions ]
-do
+startProjectTime=`date +%s`
+
+for (( verNo = 1; verNo <= $versions; verNo++ )); do
 	cd version$verNo/
-	bash solveProject.sh
+		
+	# Copying 0/ folder & main script from the version №1 to the other versions 
+	if [[ $verNo>1 ]]; then
+		cp -r ../version1/*.sh ./
+		cp -r ../version1/0 ./
+		rm -r 0/geometry/*.stl
+		printf '\n'
+	fi
+	printf 'Running solveVersion script on %s\n' ${PWD}
+	bash check.sh
+	# bash solveVersion.sh
 	cd ../
 done
+
+endProjectTime=`date +%s`
+projectTime=$((endProjectTime-startProjectTime))
+printf 'All versions have being solved in %dh:%dm:%ds\n'\
+	 $(($projectTime/3600)) $(($projectTime%3600/60)) $(($projectTime%60))
 
 # ***************************************************************************** #
 

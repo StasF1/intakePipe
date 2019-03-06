@@ -44,14 +44,14 @@ sed -i "s/strokeToReplace/$stroke/g" snappyHexMeshDict
 # sed "s/strokeToReplace/$stroke/g" snappyHexMeshDictToRepl > snappyHexMeshDict
 
 # Генерация сетки
-printf '  Meshing...'
 cd ../
+printf 'Running snappyHexMesh on %s\n' ${PWD}
 sh firstMesh.sh > mesh.log
 checkMesh >> mesh.log
 
 # Запуск расчёта
-printf '\n  Solving the case...'
 cd ../case/
+printf 'Running simpleFoam on %s\n' ${PWD}
 sh firstRun.sh > case.log
 
 # ***************************************************************************** #
