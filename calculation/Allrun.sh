@@ -44,7 +44,7 @@ for (( verNo = 1; verNo <= $versions; verNo++ )); do
 		rm -r 0/geometry/*.stl
 		printf '\n'
 	fi
-	printf 'Running solveVersion script on %s\n' ${PWD}
+	printf 'Running solveVersion.sh on %s\n' ${PWD}
 	bash check.sh
 	# bash solveVersion.sh
 	cd ../
