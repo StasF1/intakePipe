@@ -45,8 +45,7 @@ for (( verNo = 1; verNo <= $versions; verNo++ )); do
 		printf '\n'
 	fi
 	printf 'Running solveVersion.sh on %s\n' ${PWD}
-	bash check.sh
-	# bash solveVersion.sh
+	bash solveVersion.sh
 	cd ../
 done
 
