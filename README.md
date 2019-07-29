@@ -10,7 +10,7 @@ The purpose of this work was to create a method for determining the characterist
 1. **OpenFOAM v5** or higher 
 2. **MATLAB**
 
-# [Releases](https://github.com/StasF1/dualFuelEngine/releases)
+# [Releases](https://github.com/StasF1/intakePipe/releases)
 |Version|Description|Source code 📥|
 |------:|:----------|:-------------|
 [v2-beta](https://github.com/StasF1/intakePipe/tree/v2-beta)|Postproccessing using MATLAB and ParaView|[.tar.gz](https://github.com/StasF1/intakePipe/archive/v2-beta.tar.gz), [.zip](https://github.com/StasF1/intakePipe/archive/v2-beta.zip)|
