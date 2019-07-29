@@ -34,9 +34,11 @@ Because main script runs the others if you need to recompilate something you do 
 ### MATLAB
 The *solveVersion.sh* script makes *inletPatchPressures.txt* file  in `version#/` directory with inlet patch pressures for every stroke.
 In the directory `postProcessing/flowCoefficient/` run *Main.m* to calculate flow coeffiecient of intake pipe. It also considers three versions of minimal flow area (from I to III on the picture) or even if it is moves to the *d_2* diameter of the pipe.
+
 ![valveStep](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/valveCones.png)
 
 In result we have got set of plots and one from them is a plot with flow coefficent for 3 versions of intake pipes:
+
 ![mu](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu.png)
 
 ### Paraview
