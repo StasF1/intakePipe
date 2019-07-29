@@ -41,7 +41,7 @@ As a result we have got set of plots and one from them is a plot with flow coeff
 
 ![mu](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu.png)
 
-### Paraview
+### ParaView
 Every `version#/#/case` folder has got a *caseState.pvsm* file when you open it in the ParaView with ''`Load State...`'' it calculates swirl numbers in the cylinder automatically.
 
 ⚠ **In case if you need to make a simulation with another pipe geometry** - read [**Wiki**](https://github.com/StasF1/intakePipe/wiki/Home).
