@@ -37,7 +37,7 @@ In the directory `postProcessing/flowCoefficient/` run *Main.m* to calculate flo
 
 ![valveStep](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/valveCones.png)
 
-In result we have got set of plots and one from them is a plot with flow coefficent for 3 versions of intake pipes:
+As a result we have got set of plots and one from them is a plot with flow coefficent for 3 versions of intake pipes:
 
 ![mu](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu.png)
 
