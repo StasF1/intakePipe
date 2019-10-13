@@ -4,7 +4,7 @@ The determine the characteristics of the intake ports of piston engines sometime
 The purpose of this work was to create a method for determining the characteristics of the intake channels of piston engines using an open integrable platform OpenFOAM, which was used to solve the problems described above. Being a really handy tool, it allows automate the process of manually changing the solid model for each valve lift!
 
 ## Block diagramm of the algorythm
-![alt text](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/blockDiagram.png)
+![blockDiagram](https://github.com/StasF1/intakePipe/wiki/images/blockDiagram.png)
 
 # Requirements
 1. **OpenFOAM v5** or higher 
@@ -35,11 +35,11 @@ Because main script runs the others if you need to recompilate something you do 
 The *solveVersion.sh* script makes *inletPatchPressures.txt* file  in `version#/` directory with inlet patch pressures for every stroke.
 In the directory `postProcessing/flowCoefficient/` run *Main.m* to calculate flow coeffiecient of intake pipe. It also considers three versions of minimal flow area (from I to III on the picture) or even if it is moves to the *d_2* diameter of the pipe.
 
-![valveStep](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/valveCones.png)
+![valveStep](https://github.com/StasF1/intakePipe/wiki/images/valveStep.png)
 
 As a result we have got set of plots and one from them is a plot with flow coefficent for 3 versions of intake pipes:
 
-![mu](https://github.com/StasF1/READMEPictures/blob/master/intakePipe/mu.png)
+![mu](https://github.com/StasF1/intakePipe/wiki/images/mu.png)
 
 ### ParaView
 Every `version#/#/case` folder has got a *caseState.pvsm* file when you open it in the ParaView with ''`Load State...`'' it calculates swirl numbers in the cylinder automatically.
