@@ -48,7 +48,7 @@ Every `version#/#/case` folder has got a *caseState.pvsm* file when you open it 
 
 # Structure
 ```gitignore
-intakePipe-v2
+intakePipe-v0.1
 ├── calculation
 │   ├── version1
 │   │   ├── 0               # default case (valve is closed)
