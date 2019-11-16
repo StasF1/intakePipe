@@ -1,9 +1,9 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  4.0                                   |
-|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
-|    \\/     M anipulation  |                                                 |
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
@@ -28,7 +28,7 @@ vertices
 	( -60 -50 -160 )
 	( 60 -50 -160 )
 	( 60 -50 60 )
-	( -60 -50 60 )			
+	( -60 -50 60 )
 );
 
 blocks
@@ -42,7 +42,7 @@ edges
 
 boundary
 (
-    allBoundary//Don't worry about these settings
+    allBoundary
     {
         type patch;
         faces
