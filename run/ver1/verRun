@@ -42,7 +42,7 @@ source ../intakePipeDict
 startVersionTime=`date +%s`
 
 # Create inlet patch pressures file for a version
-printf '# Time        average(p)\n' > inletPatchPressures.res
+printf '# Time        average(p)\n' > inletPatchPressures.dat
 
 # Scale .stl files
 0/./scaleGeometry
@@ -68,9 +68,9 @@ do
     #- Run the case
     $stroke/./Allrun
 
-    #- Copy postProcessing data to the inletPatchPressures.res file
+    #- Copy postProcessing data to the inletPatchPressures.dat file
     tail -n1 postProcessing/patchAverage\(p,name=inlet\)/0/surfaceFieldValue.dat\
-      >> ../../../../inletPatchPressures.res
+      >> ../../../../inletPatchPressures.dat
 
     # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
