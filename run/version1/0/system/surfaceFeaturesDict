@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  7
+    \\  /    A nd           | Version:  6
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -10,11 +10,18 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      meshQualityDict;
+    object      surfaceFeaturesDict;
 }
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#includeEtc "caseDicts/mesh/generation/meshQualityDict.cfg" // standard mesh quality settings
+surfaces
+(
+	"inlet.stl"
+	"outlet.stl"
+	"valve.stl"
+	"walls.stl"
+);
+
+#includeEtc "caseDicts/surface/surfaceFeaturesDict.cfg"
 
 // ************************************************************************* //
