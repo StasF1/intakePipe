@@ -1,0 +1,88 @@
+#!/bin/bash
+#----------------------------------*-sh-*--------------------------------------
+# =========                 |
+# \\      /  F ield         | OpenFOAM: Addition to OpenFOAM v6
+#  \\    /   O peration     | Website:  https://github.com/StasF1/intakePipe
+#   \\  /    A nd           | Copyright (C) 2018 Stanislau Stasheuski
+#    \\/     M anipulation  |
+#------------------------------------------------------------------------------
+# License
+#     This file is not part of OpenFOAM, but part of intakePipe – OpenFOAM
+#     addition.
+#   
+#     intakePipe (like OpenFOAM) is free software: you can redistribute it 
+#     and/or modify it under the terms of the GNU General Public License as
+#     published by the Free Software Foundation, either version 3 of the License,
+#     or (at your option) any later version.
+#   
+#     intakePipe (like OpenFOAM) is distributed in the hope that it will be
+#     useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#     See the GNU General Public License for more details.
+#   
+#     You should have received a copy of the GNU General Public License
+#     along with this repository. If not, see <http://www.gnu.org/licenses/>
+#
+# File
+#     verRun
+#
+# Description
+#     Run version (variant) of the inlet channel geometry with a valve stroke
+#     increase by a step
+#
+#------------------------------------------------------------------------------
+
+cd ${0%/*} || exit 1    # Run from this directory
+
+source ../intakePipeDict
+
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+# Start version stopwatch
+startVersionTime=`date +%s`
+
+# Scale .stl files
+0/./scaleGeometry
+
+# Create inlet patch pressures file for a whole version
+printf '# Time        average(p)\n' > inletPatchPressures.res
+
+# Create and run valve strokes
+stroke=$strokeStart
+while [ $stroke -le $strokeEnd ]
+do
+
+    # Run particular stoke
+    # ~~~~~~~~~~~~~~~~~~~~
+    #- Convert [mm]->[m] for the $stroke variable
+    strokeMetres=`echo "scale=3; $stroke*10^(-3)" | bc -l`
+
+    #- Create folder by copying the folder 0/
+    mkdir -p $stroke && cp -a 0/* $stroke
+    mv 0/0.foam $stroke/$stroke.foam
+
+    #- Set stroke
+    sed -i "s/strokeMetres/$strokeMetres/g" $stroke/setCurrentStroke
+    $stroke/./setCurrentStroke
+
+    #- Run the case
+    $stroke/./Allrun
+
+    #- Copy postProcessing data to the inletPatchPressures.res file
+    tail -n1 postProcessing/patchAverage\(p,name=inlet\)/0/surfaceFieldValue.dat\
+      >> ../../../../inletPatchPressures.res
+
+    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+    # Inreasing stroke by one step
+    stroke=`echo "scale=1; $stroke + $strokeDelta" |bc`
+
+done
+
+# Stop version stopwatch
+endVersionTime=`date +%s` && versionTime=$((endVersionTime-startVersionTime))
+
+printf '   All strokes for %s have being solved in %dh:%dm:%ds\n' "${PWD##*/}"\
+     "$(($versionTime/3600))" "$(($versionTime%3600/60))" "$(($versionTime%60))"
+
+#------------------------------------------------------------------------------
