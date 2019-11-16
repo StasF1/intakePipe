@@ -47,37 +47,47 @@ startVersionTime=`date +%s`
 # Create inlet patch pressures file for a whole version
 printf '# Time        average(p)\n' > inletPatchPressures.res
 
-# Create and run valve strokes
-stroke=$strokeStart
-while [ $stroke -le $strokeEnd ]
-do
+2/./setCurrentStroke  &&  2/./Allrun
+3/./setCurrentStroke  &&  3/./Allrun
+4/./setCurrentStroke  &&  4/./Allrun
+5/./setCurrentStroke  &&  5/./Allrun
+6/./setCurrentStroke  &&  6/./Allrun
+7/./setCurrentStroke  &&  7/./Allrun
+8/./setCurrentStroke  &&  8/./Allrun
+9/./setCurrentStroke  &&  9/./Allrun
+10/./setCurrentStroke && 10/./Allrun
 
-    # Run particular stoke
-    # ~~~~~~~~~~~~~~~~~~~~
-    #- Convert [mm]->[m] for the $stroke variable
-    strokeMetres=`echo "scale=3; $stroke*10^(-3)" | bc -l`
-
-    #- Create folder by copying the folder 0/
-    mkdir -p $stroke && cp -a 0/* $stroke
-    mv 0/0.foam $stroke/$stroke.foam
-
-    #- Set stroke
-    sed -i "s/strokeMetres/$strokeMetres/g" $stroke/setCurrentStroke
-    $stroke/./setCurrentStroke
-
-    #- Run the case
-    $stroke/./Allrun
-
-    #- Copy postProcessing data to the inletPatchPressures.res file
-    tail -n1 postProcessing/patchAverage\(p,name=inlet\)/0/surfaceFieldValue.dat\
-      >> ../../../../inletPatchPressures.res
-
-    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-    # Inreasing stroke by one step
-    stroke=`echo "scale=1; $stroke + $strokeDelta" |bc`
-
-done
+# # Create and run valve strokes
+# stroke=$strokeStart
+# while [ $stroke -le $strokeEnd ]
+# do
+#
+#     # Run particular stoke
+#     # ~~~~~~~~~~~~~~~~~~~~
+#     #- Convert [mm]->[m] for the $stroke variable
+#     strokeMetres=`echo "scale=3; $stroke*10^(-3)" | bc -l`
+#
+#     #- Create folder by copying the folder 0/
+#     mkdir -p $stroke && cp -a 0/* $stroke
+#     mv 0/0.foam $stroke/$stroke.foam
+#
+#     #- Set stroke
+#     sed -i "s/strokeMetres/$strokeMetres/g" $stroke/setCurrentStroke
+#     $stroke/./setCurrentStroke
+#
+#     #- Run the case
+#     $stroke/./Allrun
+#
+#     #- Copy postProcessing data to the inletPatchPressures.res file
+#     tail -n1 postProcessing/patchAverage\(p,name=inlet\)/0/surfaceFieldValue.dat\
+#       >> ../../../../inletPatchPressures.res
+#
+#     # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+#
+#     # Inreasing stroke by one step
+#     stroke=`echo "scale=1; $stroke + $strokeDelta" |bc`
+#
+# done
 
 # Stop version stopwatch
 endVersionTime=`date +%s` && versionTime=$((endVersionTime-startVersionTime))
