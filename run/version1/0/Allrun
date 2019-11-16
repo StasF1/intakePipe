@@ -7,7 +7,7 @@ cd ${0%/*} || exit 1    # Run from this directory
 application=$(getApplication)
 
 runApplication blockMesh
-runApplication surfaceFeatures
+runApplication surfaceFeatureExtract
 runApplication snappyHexMesh -overwrite
 runApplication checkMesh
 runApplication $application
