@@ -3,9 +3,9 @@
 %% Directories
 % Path to inlet pressures file
 numberOfProjects = 3; % number of compared projects  
-pathToDataVer1 = '../../calculation/version1/inletPatchPressures.txt';
-pathToDataVer2 = '../../calculation/version2/inletPatchPressures.txt';
-pathToDataVer3 = '../../calculation/version3/inletPatchPressures.txt';
+pathToDataVer1 = '../../run/version1/inletPatchPressures.txt';
+pathToDataVer2 = '../../run/version2/inletPatchPressures.txt';
+pathToDataVer3 = '../../run/version3/inletPatchPressures.txt';
 
 % Path to save the results (to save to the current folder set 0)
 pathToSave = 0; %'~/Downloads/intakePipe/Results/';
