@@ -1,0 +1,21 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Scale & transfer .stl files
+printf 'Running surfaceTransformPoints on %s\n' "${PWD}"
+mkdir -p constant/triSurface
+
+surfaceTransformPoints -translate '(1 0 0)' -scale '(0.001 0.001 0.001)'\
+    ../geometry/inlet.stl constant/triSurface/inlet.stl\
+    > log.surfaceTransformPoints 2>&1
+surfaceTransformPoints -scale '(0.001 0.001 0.001)'\
+    ../geometry/outlet.stl constant/triSurface/outlet.stl\
+    >> log.surfaceTransformPoints 2>&1
+surfaceTransformPoints -scale '(0.001 0.001 0.001)'\
+    ../geometry/valve.stl constant/triSurface/valve.stl\
+    >> log.surfaceTransformPoints 2>&1
+surfaceTransformPoints -scale '(0.001 0.001 0.001)'\
+    ../geometry/walls.stl constant/triSurface/walls.stl\
+    >> log.surfaceTransformPoints 2>&1
+
+#------------------------------------------------------------------------------
