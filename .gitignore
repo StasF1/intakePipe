@@ -3,14 +3,20 @@
 
 # Files - anywhere
 log.*
+*.gz
+cell*
+point*
 *.foam
 *.dat
 
 # Folders - anywhere
-*.wiki
 0.*/
 [1-9]*
+extendedFeatureEdgeMesh/
+polyMesh/
 triSurface/
+postProcessing/
+VTK/
 
 # Folders – local
 run/ver2/0
