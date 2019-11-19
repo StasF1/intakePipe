@@ -12,6 +12,6 @@ runApplication snappyHexMesh -overwrite
 runApplication checkMesh
 runApplication $application
 
-postProcess -func "patchAverage(p,name=inlet)" -latestTime > log.postProcess
+runApplication postProcess -funcs '(patchAverage(p,name=inlet) flowRatePatch(name=inlet))' -latestTime
 
 #------------------------------------------------------------------------------
