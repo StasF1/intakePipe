@@ -16,6 +16,7 @@ extendedFeatureEdgeMesh/
 polyMesh/
 triSurface/
 postProcessing/
+processor*/
 VTK/
 
 # Folders – local
