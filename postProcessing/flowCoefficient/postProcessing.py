@@ -33,37 +33,19 @@
 
 from __future__ import division
 import numpy as np
-# import math #, glob, os, shutil
 
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 from math import sqrt, pi
 sind = lambda x : np.sin( np.deg2rad(x) )
 cosd = lambda x : np.cos( np.deg2rad(x) )
 tand = lambda x : np.tan( np.deg2rad(x) )
 
-from flowCoefDict import *
-
-# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+from postProcessingDict import *
 
 exec(open("./createArrays.py").read())
 
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-# Get data from the .dat files
-for verNo in range(1, versions + 1):
-    
-    # Create average pressure array for a version
-    patchInletAveragePressureArray = []
-    for h in range(0, len(stroke)):
-        patchInletAveragePressureArray.append(
-            np.loadtxt(
-                f'../../run/ver{verNo}/{stroke[h]}/postProcessing/patchAverage(p,name=inlet)/0/surfaceFieldValue.dat'
-            )[1]
-        )
-    
-    # Append array of the version to the list
-    patchInletAveragePressure.append(patchInletAveragePressureArray)
 
 # Calculating minimal intake area
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,38 +72,61 @@ criticalArea = (
 
 for i in range(0, len(stroke)):
     if ( stroke[i] <= h_crI ): # cut I
-        print(f'Stroke {int(stroke[i]*1e+03)} mm: cut I')
+
+        print(f'Cut No for stroke {int(stroke[i]*1e+03)} mm: I')
         valveFlowArea.append(
-            pi*stroke[i]*cosd(teta)*( d_pipe - stroke[i]*sind(teta)*cosd(teta) )
+            pi*stroke[i]*cosd(teta)
+           *(   
+                d_pipe - stroke[i]*sind(teta)*cosd(teta)
+            )
         )
 
     elif (stroke[i] > h_crI) & (stroke[i] <= h_crII): # cut II
-        print(f'Stroke {int(stroke[i]*1e+03)} mm: cut II')
+        print(f'Cut No for stroke {int(stroke[i]*1e+03)} mm: II')
+
         valveFlowArea.append(
-            pi*stroke[i]*cosd(teta)*( d_1 + stroke[i]*sind(teta)*cosd(teta) )
+            pi*stroke[i]*cosd(teta)
+           *(
+                d_1 + stroke[i]*sind(teta)*cosd(teta)
+            )
         )
 
     else: # cut III
-        print(f'Stroke {int(stroke[i]*1e+03)} mm: cut III')
+        print(f'Cut No for stroke {int(stroke[i]*1e+03)} mm: III')
+
         valveFlowArea.append(
-            pi/4*(d_2Pipe + d_1)*sqrt( pow(d_2Pipe - d_1, 2) + pow(2*stroke[i] - (d_2Pipe - d_1)*tand(teta), 2) )
+            pi/4*(d_2Pipe + d_1)
+           *sqrt(
+                pow(d_2Pipe - d_1, 2)
+              + pow(2*stroke[i] - (d_2Pipe - d_1)*tand(teta), 2)
+            )
         )
 
-    if (valveFlowArea[i] > criticalArea):    valveFlowArea[i] = criticalArea
+    if (valveFlowArea[i] > criticalArea):
+        valveFlowArea[i] = criticalArea
 
 
-# ## Calculating flow coefficients
-# #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# G = ro_gas*F_inlet*u_Ver1;
-#
-# muVer1 = flowCoef(u_Ver1, G, h, valveFlowArea, p_inletVer1);
-# muVer2 = flowCoef(u_Ver2, G, h, valveFlowArea, p_inletVer2);
-# muVer3 = flowCoef(u_Ver2, G, h, valveFlowArea, p_inletVer3);
-#
-# for i = 1:len(h)
-#     mufVer1(i) = muVer1(i)*valveFlowArea(i);
-#     mufVer2(i) = muVer2(i)*valveFlowArea(i);
-#     mufVer3(i) = muVer3(i)*valveFlowArea(i);
-# end
+# Calculating flow coefficients
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+plt.figure()
+
+for verNo in range(0, versions):
+    pressureDifference.append(
+        [
+            p + pow(u[verNo], 2)/2 for p in patchInletAveragePressure[verNo]
+        ]
+    )
+
+    mu.append(
+        flowRatePatchInlet[verNo]
+       /np.array(valveFlowArea)
+       /np.sqrt(
+            2*np.array(pressureDifference[verNo])
+        )
+    )
+
+    plt.plot(stroke*1e+03, mu[verNo], linewidth=2)
+    plt.xlabel('Stroke, mm'); plt.ylabel('$\mu$'); plt.grid(True)
+    plt.savefig('mu.png')
 
 # -----------------------------------------------------------------------------
