@@ -8,19 +8,21 @@ cell*
 point*
 *.foam
 *.dat
+*.png
 
 # Folders - anywhere
+__pycache__/
 0.*/
 [1-9]*
 extendedFeatureEdgeMesh/
 polyMesh/
 triSurface/
-postProcessing/
 processor*/
 VTK/
 
 # Folders – local
-run/ver2/0
-run/ver2/verRun
-run/ver3/0
-run/ver3/verRun
+run/**/postProcessing/
+run/**/0
+! run/ver1/0
+run/**/verRun
+! run/ver1/verRun
