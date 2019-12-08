@@ -4,7 +4,7 @@ The determine the characteristics of the intake ports of piston engines sometime
 The purpose of this work was to create a method for determining the characteristics of the intake channels of piston engines using an open integrable platform OpenFOAM, which was used to solve the problems described above. Being a really handy tool, it allows automate the process of manually changing the solid model for each valve lift!
 
 ## Block diagramm of the algorythm
-![blockDiagram](https://github.com/StasF1/intakePipe/wiki/src/images/blockDiagram.png)
+![blockDiagram](https://github.com/StasF1/intakePipe/wiki/src/images/blockDiagram-0.2.png)
 
 # Requirements
 1. **OpenFOAM** - tested using *v6*
@@ -50,7 +50,7 @@ As a result we have got set of plots and one from them is a plot with flow coeff
 ![mu](https://github.com/StasF1/intakePipe/wiki/src/images/mu.png)
 
 ### ParaView
-Every *version#/<stroke>/* folder has got a *caseState.pvsm* file when you open it in the ParaView with ''`Load State...`'' it calculates swirl numbers in the cylinder automatically.
+_postProcessing/swirlNumber_ folder has got a *swirlNumber.pvsm* ParaView state file when you open it in the ParaView using ''`Load State...`'' it will calculate swirl numbers in the cylinder automatically.
 
 ---
 ⚠ **In case if you need to make a simulation with another pipe geometry** - read [**Wiki**](https://github.com/StasF1/intakePipe/wiki/Home).
