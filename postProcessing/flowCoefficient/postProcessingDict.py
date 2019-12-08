@@ -2,7 +2,7 @@
 =========                 |
 \\      /  F ield         | OpenFOAM: Addition to OpenFOAM v6
  \\    /   O peration     | Website:  https://github.com/StasF1/intakePipe
-  \\  /    A nd           | Copyright (C) 2018 Stanislau Stasheuski
+  \\  /    A nd           | Copyright (C) 2018-2019 Stanislau Stasheuski
    \\/     M anipulation  |
 ----------------------------------------------------------------------------'''
 exec(
