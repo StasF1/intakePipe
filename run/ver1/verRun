@@ -41,9 +41,6 @@ source ../intakePipeDict
 # Start version stopwatch
 startVersionTime=`date +%s`
 
-# Create inlet patch pressures file for a version
-printf '# Time        average(p)\n' > inletPatchPressures.dat
-
 # Scale .stl files
 0/./scaleGeometry
 
@@ -68,10 +65,6 @@ do
     #- Run the case
     $stroke/./Allrun
 
-    #- Copy postProcessing data to the inletPatchPressures.dat file
-    tail -n1 postProcessing/patchAverage\(p,name=inlet\)/0/surfaceFieldValue.dat\
-      >> ../../../../inletPatchPressures.dat
-
     # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
     # Inreasing stroke by one step
@@ -82,7 +75,7 @@ done
 # Stop version stopwatch
 endVersionTime=`date +%s` && versionTime=$((endVersionTime-startVersionTime))
 
-printf '   All strokes for %s have being solved in %dh:%dm:%ds\n' "${PWD##*/}"\
+printf '   All strokes for %s have being run in %dh:%dm:%ds\n' "${PWD##*/}"\
      "$(($versionTime/3600))" "$(($versionTime%3600/60))" "$(($versionTime%60))"
 
 #------------------------------------------------------------------------------

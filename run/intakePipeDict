@@ -8,10 +8,10 @@
 
 versions=3 # количество версий для расчёта
 
-strokeStart=2 # m, начальный ход клапана
+strokeStart=2 # mm, initial valve stroke
 
-strokeEnd=10 # m, конечный ход клапана
+strokeEnd=10 # mm, finite valve stroke
 
-strokeDelta=1 # m, шаг хода клапана (только целые значения)
+strokeDelta=1 # mmstroke step (only int type)
 
-# ***************************************************************************** #
+# *************************************************************************** #
