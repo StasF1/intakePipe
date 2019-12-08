@@ -1,13 +1,13 @@
-#----------------------------------*-py-*--------------------------------------
-# =========                 |
-# \\      /  F ield         | OpenFOAM: Addition to OpenFOAM v6
-#  \\    /   O peration     | Website:  https://github.com/StasF1/intakePipe
-#   \\  /    A nd           | Copyright (C) 2018 Stanislau Stasheuski
-#    \\/     M anipulation  |
-#------------------------------------------------------------------------------
-
-exec(open('../../run/./intakePipeDict').read())
-
+'''-------------------------------*- py -*-------------------------------------
+=========                 |
+\\      /  F ield         | OpenFOAM: Addition to OpenFOAM v6
+ \\    /   O peration     | Website:  https://github.com/StasF1/intakePipe
+  \\  /    A nd           | Copyright (C) 2018 Stanislau Stasheuski
+   \\/     M anipulation  |
+----------------------------------------------------------------------------'''
+exec(
+    open('../../run/./intakePipeDict').read()
+)
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * #
 
 # Boundary conditions
@@ -18,7 +18,7 @@ u = [
 ]
 
 # Pipe & valve geometry
-d_pipe = 25.688 # mm, the minimum diameter of intake pipe (or diameter for the A point)
+d_pipe = 25.688 # mm, minimum diameter of intake pipe (or diameter for the A point)
 
 d_2Pipe = 29.756 # mm, chamfer diameter of valve neck (or diameter for the A1 point)
 

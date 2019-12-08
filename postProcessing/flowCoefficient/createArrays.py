@@ -39,6 +39,10 @@ for verNo in range(1, versions + 1):
         )
 
     # Append array of the version to the lists
-    flowRatePatchInlet.append(flowRatePatchInletArray)
+    flowRatePatchInlet.append(
+        np.array(flowRatePatchInletArray)
+    )
 
-    patchInletAveragePressure.append(patchInletAveragePressureArray)
+    patchInletAveragePressure.append(
+        np.array(patchInletAveragePressureArray)
+    )
