@@ -1,0 +1,28 @@
+# git-ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+
+# Files - anywhere
+log.*
+*.gz
+cell*
+point*
+*.foam
+*.dat
+*.png
+
+# Folders - anywhere
+__pycache__/
+0.*/
+[1-9]*
+extendedFeatureEdgeMesh/
+polyMesh/
+triSurface/
+processor*/
+VTK/
+
+# Folders – local
+run/**/postProcessing/
+run/**/0
+! run/ver1/0
+run/**/verRun
+! run/ver1/verRun

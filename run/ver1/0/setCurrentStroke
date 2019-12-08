@@ -1,0 +1,18 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Задание хода клапана
+stroke=-0strokeMetres
+
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+# Изменение хода клапана
+surfaceTransformPoints -translate "(0 0 $stroke)"\
+    constant/triSurface/valve.stl constant/triSurface/valve.stl\
+    >> log.surfaceTransformPoints 2>&1
+
+# Изменение размера цилиндра для измельчения сетки под ход клапана в
+# словаре snappyHexMeshDict
+sed -i "s/strokeToReplace/$stroke/g" system/snappyHexMeshDict
+
+#------------------------------------------------------------------------------
