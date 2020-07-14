@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-stroke         sed_stroke;
+stroke         -0.002;
 
 #includeEtc "caseDicts/mesh/generation/snappyHexMeshDict.cfg"
 

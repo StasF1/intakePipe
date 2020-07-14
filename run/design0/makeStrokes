@@ -41,11 +41,13 @@ do
     # Convert [mm]->[m] for the stroke variable
     strokeMetres=`echo "scale=3; $h*10^(-3)" | bc -l`
 
-    # Create stroke folder by copying the stroke_0mm/ folder
-    mkdir -p stroke_${h}mm && cp -a stroke_0mm/* stroke_${h}mm
+    # Create stroke folder by copying the initial stroke folder
+    if [[ $h > $strokeStart ]]; then
+        mkdir -p stroke_${h}mm && cp -a stroke_2mm/* stroke_${h}mm
+    fi
 
     #- Set stroke
-    sed -i "s/strokeMetres/$strokeMetres/g" stroke_${h}mm/Allmesh
+    sed -i "s/stroke=-0.002/stroke=-0$strokeMetres/g" stroke_${h}mm/Allmesh
 
     h=`echo "scale=1; $h + $strokeDelta" | bc`
 done

@@ -5,7 +5,7 @@ cd ${0%/*} || exit 1    # Run from this directory
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 # Set valve stroke
-stroke=-0.008 #[m]
+stroke=-0.002 #[m]
 
 touch ${PWD##*/}.foam
 
@@ -30,7 +30,8 @@ runApplication -a surfaceTransformPoints -translate "(0 0 $stroke)"\
 runApplication blockMesh
 
 # Change cylinder where mesh size will be reduced
-sed -i "s/sed_stroke/$stroke/g" system/snappyHexMeshDict
+sed -i "s/stroke         -0.002/stroke         $stroke/g"\
+    system/snappyHexMeshDict
 runApplication surfaceFeatures
 runApplication snappyHexMesh -overwrite
 

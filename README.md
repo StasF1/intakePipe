@@ -91,7 +91,7 @@ read [**Wiki**](https://github.com/StasF1/intakePipe/wiki/Home).
 intakePipe-0.3
 ├── run
 │   ├── design0
-│   │   ├── stroke_0mm     # default case (valve closed)
+│   │   ├── stroke_2mm     # default case
 │   │   └── geometry       # .stl files
 │   ├── design1
 │   │   └── geometry

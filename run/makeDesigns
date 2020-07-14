@@ -35,7 +35,8 @@ for (( i = 0; i <= $designNo; i++ )); do
 
     # Clone settings from design0/ folder for every design folder
     if [[ $i > 0 ]]; then
-        cp -r design0/stroke_0mm design0/makeStrokes design$i/
+        cp -r design0/stroke_${strokeStart}mm design0/stroke_${strokeStart}mm\
+            design$i/
     fi
 
     # Create strokes
