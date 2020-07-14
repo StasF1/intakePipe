@@ -3,49 +3,51 @@
 # =========                 |
 # \\      /  F ield         | OpenFOAM: Addition to OpenFOAM v6
 #  \\    /   O peration     | Website:  https://github.com/StasF1/intakePipe
-#   \\  /    A nd           | Copyright (C) 2018-2019 Stanislau Stasheuski
+#   \\  /    A nd           | Copyright (C) 2018-2020 Stanislau Stasheuski
 #    \\/     M anipulation  |
-#------------------------------------------------------------------------------
-# License
+#------------------------------------------------------------------------------# License
 #     This file is not part of OpenFOAM, but part of intakePipe – OpenFOAM
 #     addition.
 #
 #     intakePipe (like OpenFOAM) is free software: you can redistribute it 
 #     and/or modify it under the terms of the GNU General Public License as
-#     published by the Free Software Foundation, either ver 3 of the License,
-#     or (at your option) any later ver.
-#
+#     published by the Free Software Foundation, either version 3 of the License,
+#     or (at your option) any later version.
+#   
 #     intakePipe (like OpenFOAM) is distributed in the hope that it will be
 #     useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 #     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 #     See the GNU General Public License for more details.
-#
+#   
 #     You should have received a copy of the GNU General Public License
 #     along with this repository. If not, see <http://www.gnu.org/licenses/>
 #
 # File
-#     AllVerRun
+#     makeStrokes
 #
 # Description
-#     Run all channel geometry versions (variants)
+#     Run version (variant) of the inlet channel geometry with a valve stroke
+#     increase by a step
 #
 #------------------------------------------------------------------------------
+cd ${0%/*} || exit 1    # Run from this directory
 
-source intakePipeDict
+source ../strokeDict
 
-# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+# Create valve strokes cases
+h=$strokeStart
+while [ $h -le $strokeEnd ]
+do
+    # Convert [mm]->[m] for the stroke variable
+    strokeMetres=`echo "scale=3; $h*10^(-3)" | bc -l`
 
-for (( verNo = 1; verNo <= $versions; verNo++ )); do
+    # Create stroke folder by copying the stroke_0mm/ folder
+    mkdir -p stroke_${h}mm && cp -a stroke_0mm/* stroke_${h}mm
 
-    # Copying 0/ folder & verRun script from the ver1/ to the other versions 
-    if [[ $verNo>1 ]]; then
-        cp -r ver1/verRun ver$verNo/
-        cp -r ver1/0 ver$verNo/
-    fi
+    #- Set stroke
+    sed -i "s/strokeMetres/$strokeMetres/g" stroke_${h}mm/Allmesh
 
-    # Run version (variant) of the inlet channel geometry
-    ver$verNo/./verRun
-
+    h=`echo "scale=1; $h + $strokeDelta" | bc`
 done
 
 #------------------------------------------------------------------------------

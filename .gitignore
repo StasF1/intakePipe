@@ -22,7 +22,7 @@ VTK/
 
 # Folders – local
 run/**/postProcessing/
-run/**/0
-! run/ver1/0
-run/**/verRun
-! run/ver1/verRun
+run/**/stroke_*mm
+run/**/makeStrokes
+!run/design0/stroke_0mm
+!run/design0/makeStrokes

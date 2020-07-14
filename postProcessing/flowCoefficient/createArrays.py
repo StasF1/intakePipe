@@ -17,7 +17,7 @@ pressureDifference        = [ ]
 mu                        = [ ]
 
 # Get data from the .dat files
-for verNo in range(1, versions + 1):
+for i in range(designNo):
 
     # Create arrays for a version
     patchInletAveragePressureArray = [ ]
@@ -27,22 +27,13 @@ for verNo in range(1, versions + 1):
     for h in range(0, len(stroke)):
         patchInletAveragePressureArray.append(
             np.loadtxt(
-                f'../../run/ver{verNo}/{stroke[h]}/postProcessing/patchAverage(p,name=inlet)/0/surfaceFieldValue.dat'
-            )[1]
-        )
+                f'../../run/design{i}/{stroke[h]}/postProcessing/patchAverage(p,name=inlet)/0/surfaceFieldValue.dat')[1])
+
         flowRatePatchInletArray.append(
-            abs(
-                np.loadtxt(
-                    f'../../run/ver{verNo}/{stroke[h]}/postProcessing/flowRatePatch(name=inlet)/0/surfaceFieldValue.dat'
-                )[1]
-            )
-        )
+            abs(np.loadtxt(
+                f'../../run/design{i}/{stroke[h]}/postProcessing/flowRatePatch(name=inlet)/0/surfaceFieldValue.dat')[1]))
 
     # Append array of the version to the lists
-    flowRatePatchInlet.append(
-        np.array(flowRatePatchInletArray)
-    )
+    flowRatePatchInlet.append(np.array(flowRatePatchInletArray))
 
-    patchInletAveragePressure.append(
-        np.array(patchInletAveragePressureArray)
-    )
+    patchInletAveragePressure.append(np.array(patchInletAveragePressureArray))

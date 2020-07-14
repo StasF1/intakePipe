@@ -1,0 +1,47 @@
+#!/bin/bash
+#----------------------------------*-sh-*--------------------------------------
+# =========                 |
+# \\      /  F ield         | OpenFOAM: Addition to OpenFOAM v6
+#  \\    /   O peration     | Website:  https://github.com/StasF1/intakePipe
+#   \\  /    A nd           | Copyright (C) 2018-2019 Stanislau Stasheuski
+#    \\/     M anipulation  |
+#------------------------------------------------------------------------------# License
+#     This file is not part of OpenFOAM, but part of intakePipe – OpenFOAM
+#     addition.
+#
+#     intakePipe (like OpenFOAM) is free software: you can redistribute it 
+#     and/or modify it under the terms of the GNU General Public License as
+#     published by the Free Software Foundation, either ver 3 of the License,
+#     or (at your option) any later ver.
+#
+#     intakePipe (like OpenFOAM) is distributed in the hope that it will be
+#     useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#     See the GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with this repository. If not, see <http://www.gnu.org/licenses/>
+#
+# File
+#     makeDesigns
+#
+# Description
+#     Run all channel geometry designs
+#
+#------------------------------------------------------------------------------
+cd ${0%/*} || exit 1    # Run from this directory
+
+source strokeDict
+
+for (( i = 0; i <= $designNo; i++ )); do
+
+    # Clone settings from design0/ folder for every design folder
+    if [[ $i > 0 ]]; then
+        cp -r design0/stroke_0mm design0/makeStrokes design$i/
+    fi
+
+    # Create strokes
+    design$i/./makeStrokes
+done
+
+#------------------------------------------------------------------------------

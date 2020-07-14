@@ -58,7 +58,7 @@ geometry
 	{
 		type   searchableCylinder;       // region defined by bounding box
 		point1          (0 0 0.020);
-		point2          (0 0 strokeToReplace);     // z координата - ход клапана
+		point2          (0 0 -0strokeMetres);     // z координата - ход клапана
 	
 		radius 0.015;
 	}
