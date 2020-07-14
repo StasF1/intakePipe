@@ -12,9 +12,8 @@ FoamFile
     class       dictionary;
     object      meshQualityDict;
 }
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#includeEtc "caseDicts/mesh/generation/meshQualityDict.cfg" // standard mesh quality settings
+#includeEtc "caseDicts/mesh/generation/meshQualityDict.cfg"
 
 // ************************************************************************* //

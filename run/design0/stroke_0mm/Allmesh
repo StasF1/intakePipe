@@ -5,7 +5,9 @@ cd ${0%/*} || exit 1    # Run from this directory
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 # Set valve stroke
-stroke=-0strokeMetres #[m]
+stroke=-0.008 #[m]
+
+touch ${PWD##*/}.foam
 
 # Scale & transfer .stl files
 mkdir -p constant/triSurface
@@ -28,9 +30,9 @@ runApplication -a surfaceTransformPoints -translate "(0 0 $stroke)"\
 runApplication blockMesh
 
 # Change cylinder where mesh size will be reduced
-sed -i "s/strokeToReplace/$stroke/g" system/snappyHexMeshDict
-runApplication surfaceFeatureExtract
-runApplication snappyHexMesh
+sed -i "s/sed_stroke/$stroke/g" system/snappyHexMeshDict
+runApplication surfaceFeatures
+runApplication snappyHexMesh -overwrite
 
 # runApplication checkMesh
 

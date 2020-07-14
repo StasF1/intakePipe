@@ -10,37 +10,18 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      blockMeshDict;
+    object      surfaceFeaturesDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-convertToMeters 1;
-
-vertices
+surfaces
 (
-    (-0.1  0.1 -0.2)
-    ( 0.1  0.1 -0.2)
-    ( 0.1  0.1  0.2)
-    (-0.1  0.1  0.2)
-    (-0.1 -0.1 -0.2)
-    ( 0.1 -0.1 -0.2)
-    ( 0.1 -0.1  0.2)
-    (-0.1 -0.1  0.2)
+    "inlet.stl"
+    "outlet.stl"
+    "valve.stl"
+    "walls.stl"
 );
 
-blocks
-(
-    hex (0 1 2 3 4 5 6 7)
-    (50 100 50) // cell size 4[mm]
-    simpleGrading (1 1 1)
-);
-
-edges
-(
-);
-
-boundary
-(
-);
+#includeEtc "caseDicts/surface/surfaceFeaturesDict.cfg"
 
 // ************************************************************************* //
