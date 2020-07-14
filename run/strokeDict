@@ -8,10 +8,10 @@
 
 designNo=2 # max design number from 0
 
-strokeStart=2 # mm, initial valve stroke
+strokeStart=2 #[mm] initial valve stroke
 
-strokeEnd=3 # mm, finite valve stroke
+strokeEnd=8 #[mm] finite valve stroke
 
-strokeDelta=1 # mm, stroke step (only int type)
+strokeDelta=1 #[mm] stroke step (only int type)
 
 # *****************************************************************************

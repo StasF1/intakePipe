@@ -19,8 +19,8 @@ changing the solid model for each valve lift!
 ![blockDiagram](https://github.com/StasF1/intakePipe/wiki/src/images/blockDiagram-0.2.png)
 
 # Requirements
-1. **OpenFOAM** - tested using *v6*
-1. **Python3** with *NumPy* & *Matplotlib* libraries - tested using Python
+1. **OpenFOAM** - tested using **v6** and **v7**
+1. **Python3** with **NumPy** & **Matplotlib** libraries - tested using Python
     *v3.7.4* with NumPy *v1.8.0rc1* & Matplotlib *v1.3.1*
 
 

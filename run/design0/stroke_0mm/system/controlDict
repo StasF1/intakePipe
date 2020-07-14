@@ -33,11 +33,11 @@ writeInterval   100;
 
 purgeWrite      0;
 
-writeFormat     ascii;
+writeFormat     binary;
 
 writePrecision  6;
 
-writeCompression on;
+writeCompression off;
 
 timeFormat      general;
 
@@ -47,8 +47,8 @@ runTimeModifiable true;
 
 functions
 {
-	#includeFunc staticPressure(name=inlet) // Pa
-	#includeFunc totalPressureIncompressible(name=inlet) // mˆ2/sˆ2 (or pressure/density - [p/ro] = [ Pa/(kg/m^2) ] = [ (kg/m*s^2) / (kg/m^2) ] )
+    #includeFunc residuals
+    #includeFunc staticPressure(name=inlet) //[Pa]
+    #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
 }
-
 // ************************************************************************* //
