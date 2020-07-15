@@ -1,8 +1,8 @@
 # Stroke array
 stroke = np.arange(
-    strokeStart,
-    strokeEnd + strokeDelta,
-    strokeDelta
+    STROKE_INIT,
+    STROKE_FINITE + STROKE_STEP,
+    STROKE_STEP
 )
 
 # Lists
@@ -17,7 +17,7 @@ pressureDifference        = [ ]
 mu                        = [ ]
 
 # Get data from the .dat files
-for i in range(designNo):
+for i in range(DESIGN_NO):
 
     # Create arrays for a version
     patchInletAveragePressureArray = [ ]

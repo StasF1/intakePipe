@@ -6,12 +6,12 @@
 #    \\/     M anipulation  |
 #------------------------------------------------------------------------------
 
-designNo=0 # max design number from 0
+DESIGN_NO=2 # max design number from 0
 
-strokeStart=2 #[mm] initial valve stroke
+STROKE_INIT=2 #[mm] initial valve stroke
 
-strokeEnd=8 #[mm] finite valve stroke
+STROKE_FINITE=10 #[mm] finite valve stroke
 
-strokeDelta=2 #[mm] stroke step (only int type)
+STROKE_STEP=1 #[mm] stroke step (only int type)
 
 # *****************************************************************************

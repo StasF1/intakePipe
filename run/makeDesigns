@@ -31,11 +31,12 @@
 #------------------------------------------------------------------------------
 source strokeDict
 
-for (( i = 0; i <= $designNo; i++ )); do
-
-    # Clone settings from design0/ folder for every design folder
-    if [[ $i > 0 ]]; then
-        cp -r design0/stroke_${strokeStart}mm design0/stroke_${strokeStart}mm\
+for (( i = 0; i <= $DESIGN_NO; i++ ))
+do
+    # Clone settings from design0/ folder to every design folder
+    if [ $i -gt 0 ]
+    then
+        cp -r design0/stroke_${STROKE_INIT}mm design0/makeStrokes\
             design$i/
     fi
 
