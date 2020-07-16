@@ -16,7 +16,11 @@ runApplication $(getApplication)
 #     -fields '(p phi static(p) total(p) U)'
 
 #- Post process
-runApplication postProcess -latestTime\
-    -funcs '(patchAverage(p,name=inlet) flowRatePatch(name=inlet))'
+runApplication postProcess -latestTime -funcs\
+    '(
+        patchAverage(p,name=inlet)
+        patchAverage(total(p),name=inlet)
+        flowRatePatch(name=inlet)
+    )'
 
 #------------------------------------------------------------------------------

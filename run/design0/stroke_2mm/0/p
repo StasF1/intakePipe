@@ -22,7 +22,9 @@ boundaryField
 {
     inlet
     {
-        type            zeroGradient;
+        // type            zeroGradient;
+        type            totalPressure;
+        p0              uniform 6.7e3; //[m^2/s^2]
     }
 
     outlet
