@@ -35,7 +35,7 @@ cd ${0%/*} || exit 1    # Run from this directory
 source ../strokeDict
 
 # Create valve strokes cases
-for (( h = $STROKE_INIT; h <= $STROKE_FINITE; h++ ))
+for (( h = $STROKE_INIT; h <= $STROKE_FINITE; h += $STROKE_STEP ))
 do
     printf 'Running makeStrokes script on %s\n' "$PWD/stroke_${h}mm"
 
