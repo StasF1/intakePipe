@@ -26,19 +26,19 @@ boundaryField
         type            calculated;
         value           uniform 0;
     }
-    
+
     outlet
     {
         type            calculated;
         value           uniform 0;
     }
-    
+
     valve
     {
         type            nutkWallFunction;
         value           uniform 0;
     }
-    
+
     walls
     {
         type            nutkWallFunction;

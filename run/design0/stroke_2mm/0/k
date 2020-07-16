@@ -24,7 +24,7 @@ boundaryField
     inlet
     {
         type            fixedValue;
-        value           uniform 0.844;
+        value           $internalField;
     }
     
     outlet
@@ -35,13 +35,13 @@ boundaryField
     valve
     {
         type            kqRWallFunction;
-        value           uniform 0.844;
+        value           $internalField;
     }
     
     walls
     {
         type            kqRWallFunction;
-        value           uniform 0.844;
+        value           $internalField;
     }
 }
 

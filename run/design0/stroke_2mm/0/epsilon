@@ -24,24 +24,24 @@ boundaryField
     inlet
     {
         type            fixedValue;
-        value           uniform 16.412;
+        value           $internalField;
     }
-    
+
     outlet
     {
         type            zeroGradient;
     }
-    
+
     valve
     {
         type            epsilonWallFunction;
-        value           uniform 16.412;
+        value           $internalField;
     }
-    
+
     walls
     {
         type            epsilonWallFunction;
-        value           uniform 16.412;
+        value           $internalField;
     }
 }
 
