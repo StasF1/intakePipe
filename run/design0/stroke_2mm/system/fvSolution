@@ -51,9 +51,9 @@ relaxationFactors
 {
     equations
     {
-        U               0.4;
-        p               0.4;
-        ".*"            0.4;
+        U               0.2;
+        p               0.2;
+        ".*"            0.2;
     }
 }
 
