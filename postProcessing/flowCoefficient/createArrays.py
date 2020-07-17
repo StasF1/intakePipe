@@ -1,39 +1,31 @@
 # Stroke array
-stroke = np.arange(
-    STROKE_INIT,
-    STROKE_FINITE + STROKE_STEP,
-    STROKE_STEP
-)
+stroke = np.arange(STROKE_INIT,
+                   STROKE_FINITE + STROKE_STEP,
+                   STROKE_STEP)
 
 # Lists
-patchInletAveragePressure = [ ]
-
-flowRatePatchInlet        = [ ]
-
-valveFlowArea             = [ ]
-
-pressureDifference        = [ ]
-
-mu                        = [ ]
+pAreaAverage_inlet = []
+phiSum_inlet = []
+valveFlowArea = []
+totalPressure = []
+mu = []
 
 # Get data from the .dat files
-for i in range(DESIGN_NO):
+for i in range(DESIGN_NO + 1):
 
-    # Create arrays for a version
-    patchInletAveragePressureArray = [ ]
-
-    flowRatePatchInletArray        = [ ]
-
-    for h in range(0, len(stroke)):
-        patchInletAveragePressureArray.append(
+    # Temporary design lists
+    pAreaAverage_inlet_ = []
+    phiSum_inlet_ = []
+    for h in range(len(stroke)):
+        pAreaAverage_inlet_.append(
             np.loadtxt(
-                f'../../run/design{i}/{stroke[h]}/postProcessing/patchAverage(p,name=inlet)/0/surfaceFieldValue.dat')[1])
+                f'../../run/design{i}/stroke_{stroke[h]}mm/postProcessing/patchAverage(p,name=inlet)/0/surfaceFieldValue.dat')[1])
 
-        flowRatePatchInletArray.append(
+        phiSum_inlet_.append(
             abs(np.loadtxt(
-                f'../../run/design{i}/{stroke[h]}/postProcessing/flowRatePatch(name=inlet)/0/surfaceFieldValue.dat')[1]))
+                f'../../run/design{i}/stroke_{stroke[h]}mm/postProcessing/flowRatePatch(name=inlet)/0/surfaceFieldValue.dat')[1]))
 
-    # Append array of the version to the lists
-    flowRatePatchInlet.append(np.array(flowRatePatchInletArray))
+    # Append design lists to the project list
+    phiSum_inlet.append(np.array(phiSum_inlet_))
 
-    patchInletAveragePressure.append(np.array(patchInletAveragePressureArray))
+    pAreaAverage_inlet.append(np.array(pAreaAverage_inlet_))

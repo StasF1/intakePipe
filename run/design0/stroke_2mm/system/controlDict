@@ -29,7 +29,7 @@ deltaT          1;
 
 writeControl    timeStep;
 
-writeInterval   100;
+writeInterval   200;
 
 purgeWrite      0;
 
@@ -47,8 +47,81 @@ runTimeModifiable true;
 
 functions
 {
-    #includeFunc residuals
     #includeFunc staticPressure(name=inlet) //[Pa]
     #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
+
+    residuals
+    {
+        #includeEtc "caseDicts/postProcessing/numerical/residuals.cfg"
+        fields
+        (
+            p
+            U
+            k
+            omega
+        );
+    }
+
+    Mach
+    {
+        type            coded;
+        libs            ("libutilityFunctionObjects.so");
+        name            MachNo;
+        executeControl  timeStep;
+        writeControl    writeTime;
+        codeWrite
+        #{
+            // Set specific heat ratio
+            const dimensionedScalar gamma(dimless, 1.4);
+
+            // Read fields
+            const volVectorField& U = mesh().lookupObject<volVectorField>("U");
+            const volScalarField& p = mesh().lookupObject<volScalarField>("p");
+
+            volScalarField Ma(
+                "Ma",
+                mag(U)
+               /(
+                   sqrt(gamma*mag(p))
+                 + dimensionedScalar(U.dimensions(), SMALL)
+                )
+            );
+            Ma.write();
+        #};
+    }
+
+    // Write field amplutude values
+    read
+    {
+        type            readFields;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    timeStep;
+        writeInterval   1;
+        fields
+        (
+            static(p)
+            total(p)
+            Ma
+        );
+    }
+    fieldAmplutudes
+    {
+        type            fieldMinMax;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    timeStep;
+        writeInterval   1;
+        log             true;
+        location        false;
+        operation       magnitude;
+        fields
+        (
+            p
+            static(p)
+            total(p)
+            U
+            Ma
+        );
+    }
 }
+
 // ************************************************************************* //
