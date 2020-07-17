@@ -22,8 +22,6 @@ boundaryField
 {
     inlet
     {
-        // type            fixedValue;
-        // value           uniform (15 0 0);
         type            pressureInletOutletVelocity;
         value           $internalField;
     }
@@ -42,7 +40,6 @@ boundaryField
     {
         type            noSlip;
     }
-
 }
 
 // ************************************************************************* //

@@ -47,13 +47,13 @@ runTimeModifiable true;
 
 functions
 {
-    #includeFunc mag(field=U)
+    #includeFunc mag(U)
     #includeFunc staticPressure(name=inlet) //[Pa]
     #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
 
     //TODO: Swirl number calculation using OpenFOAM (instead of ParaView)
 
-    Mach //FIXME: Unreal Mach number values
+    Mach
     {
         type            coded;
         libs            ("libutilityFunctionObjects.so");
@@ -62,8 +62,10 @@ functions
         writeControl    writeTime;
         codeWrite
         #{
-            // Set specific heat ratio
+            // Set specific heat ratio and kinematic atmospheric pressure
             const dimensionedScalar gamma(dimless, 1.4);
+            const dimensionedScalar pAtm(dimPressure, 101325);
+            const dimensionedScalar rho(dimDensity, 1.2);
 
             // Read fields
             const volVectorField& U = mesh().lookupObject<volVectorField>("U");
@@ -71,11 +73,7 @@ functions
 
             volScalarField Ma(
                 "Ma",
-                mag(U)
-               /(
-                   sqrt(gamma*mag(p))
-                 + dimensionedScalar(U.dimensions(), SMALL)
-                )
+                mag(U)/sqrt(gamma*(p + pAtm/rho))
             );
             Ma.write();
         #};
