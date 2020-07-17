@@ -60,9 +60,20 @@ functions
         name            MachNo;
         executeControl  timeStep;
         writeControl    writeTime;
-        codeWrite
+        codeRead
         #{
-            // Set specific heat ratio and kinematic atmospheric pressure
+            volScalarField* Ma =
+                new volScalarField
+                (
+                    IOobject("Ma", mesh().time().timeName(), mesh()),
+                    mesh(),
+                    dimensionedScalar(dimless, 0)
+                );
+            Ma->store();
+        #};
+        codeExecute
+        #{
+            // Specific heat ratio and kinematic atmospheric pressure
             const dimensionedScalar gamma(dimless, 1.4);
             const dimensionedScalar pAtm(dimPressure, 101325);
             const dimensionedScalar rho(dimDensity, 1.2);
@@ -70,11 +81,14 @@ functions
             // Read fields
             const volVectorField& U = mesh().lookupObject<volVectorField>("U");
             const volScalarField& p = mesh().lookupObject<volScalarField>("p");
+            volScalarField& Ma = mesh().lookupObjectRef<volScalarField>("Ma");
 
-            volScalarField Ma(
-                "Ma",
-                mag(U)/sqrt(gamma*(p + pAtm/rho))
-            );
+            Ma = mag(U)/sqrt(gamma*(p + pAtm/rho));
+        #};
+        codeWrite
+        #{
+            volScalarField& Ma = mesh().lookupObjectRef<volScalarField>("Ma");
+
             Ma.write();
         #};
     }
@@ -105,7 +119,7 @@ functions
             Ma
         );
     }
-    fieldAmplutudes //TODO: Write Ma number on every step
+    fieldAmplutudes
     {
         type            fieldMinMax;
         libs            ("libfieldFunctionObjects.so");
