@@ -98,12 +98,11 @@ plt.figure().suptitle('Discharge coefficient',
                       fontsize=14)
 
 for i in range(DESIGN_NO + 1):
-    totalPressure.append(np.array([
-        p + U[i]**2/2 for p in pAreaAverage_inlet[i]]))
+    deltaP = pAreaAverage_inlet[i] + UAreaAverage_inlet[i]**2/2
 
     mu.append(phiSum_inlet[i]
               /valveFlowArea
-              /np.sqrt(2*totalPressure[i]))
+              /np.sqrt(2*deltaP))
 
     plt.plot(stroke*1e+3,
              mu[i],

@@ -15,17 +15,21 @@ for i in range(DESIGN_NO + 1):
 
     # Temporary design lists
     pAreaAverage_inlet_ = []
+    UAreaAverage_inlet_ = []
     phiSum_inlet_ = []
     for h in range(len(stroke)):
-        pAreaAverage_inlet_.append(
-            np.loadtxt(
-                f'../../design{i}/stroke_{stroke[h]}mm/postProcessing/patchAverage(p,name=inlet)/0/surfaceFieldValue.dat')[1])
+        post_path = f'../../design{i}/stroke_{stroke[h]}mm/postProcessing'
 
-        phiSum_inlet_.append(
-            abs(np.loadtxt(
-                f'../../design{i}/stroke_{stroke[h]}mm/postProcessing/flowRatePatch(name=inlet)/0/surfaceFieldValue.dat')[1]))
+        pAreaAverage_inlet_.append(np.loadtxt(
+            f'{post_path}/patchAverage(p,static(p),total(p),mag(U),name=inlet)/0/surfaceFieldValue.dat')[1])
+
+        UAreaAverage_inlet_.append(np.loadtxt(
+            f'{post_path}/patchAverage(p,static(p),total(p),mag(U),name=inlet)/0/surfaceFieldValue.dat')[4])
+
+        phiSum_inlet_.append(abs(np.loadtxt(
+            f'{post_path}/flowRatePatch(name=inlet)/0/surfaceFieldValue.dat')[1]))
 
     # Append design lists to the project list
-    phiSum_inlet.append(np.array(phiSum_inlet_))
-
     pAreaAverage_inlet.append(np.array(pAreaAverage_inlet_))
+    UAreaAverage_inlet.append(np.array(pAreaAverage_inlet_))
+    phiSum_inlet.append(np.array(phiSum_inlet_))

@@ -47,22 +47,13 @@ runTimeModifiable true;
 
 functions
 {
+    #includeFunc mag(field=U)
     #includeFunc staticPressure(name=inlet) //[Pa]
     #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
 
-    residuals
-    {
-        #includeEtc "caseDicts/postProcessing/numerical/residuals.cfg"
-        fields
-        (
-            p
-            U
-            k
-            omega
-        );
-    }
+    //TODO: Swirl number calculation using OpenFOAM (instead of ParaView)
 
-    Mach
+    Mach //FIXME: Unreal Mach number values
     {
         type            coded;
         libs            ("libutilityFunctionObjects.so");
@@ -90,6 +81,18 @@ functions
         #};
     }
 
+    residuals
+    {
+        #includeEtc "caseDicts/postProcessing/numerical/residuals.cfg"
+        fields
+        (
+            p
+            U
+            k
+            omega
+        );
+    }
+
     // Write field amplutude values
     read
     {
@@ -104,7 +107,7 @@ functions
             Ma
         );
     }
-    fieldAmplutudes
+    fieldAmplutudes //TODO: Write Ma number on every step
     {
         type            fieldMinMax;
         libs            ("libfieldFunctionObjects.so");

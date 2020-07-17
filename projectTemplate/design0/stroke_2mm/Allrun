@@ -18,8 +18,7 @@ runApplication $(getApplication)
 #- Post process
 runApplication postProcess -latestTime -funcs\
     '(
-        patchAverage(p,name=inlet)
-        patchAverage(total(p),name=inlet)
+        patchAverage(p,static(p),total(p),mag(U),name=inlet)
         flowRatePatch(name=inlet)
     )'
 
