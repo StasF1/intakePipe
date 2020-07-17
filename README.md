@@ -1,22 +1,25 @@
 # About intakePipe
 The determine the characteristics of the intake ports of piston engines
-sometimes is tough thing to do. To ensure a high quality gas exchange and
-combustion, it requies a series of calculations for various valve lifts both
-to determine their flow characteristics and to evaluate the ability to generate
-a vortex in the cylinder during the intake period. So, it is necessary to
-change the solid-state model of the channel for each valve lift, adjust the
-grid generation parameters based on it, and carry out a CFD calculation. This
-makes the procedure for determining the characteristics of the intake channels
-is time consuming.
+sometimes is tough thing to do.
+To ensure a high quality gas exchange and combustion, it requies a series of
+calculations for various valve lifts both to determine their flow
+characteristics and to evaluate the ability to generate a vortex in the
+cylinder during the intake period. So, it is necessary to change the
+solid-state model of the channel for each valve lift, adjust the grid
+generation parameters based on it, and carry out a CFD calculation.
+This makes the procedure for determining the characteristics of the intake
+channels is time consuming.
 
-The purpose of this work was to create a method for determining the
+The purpose of this template is to create a method for determining the
 characteristics of the intake channels of piston engines using an open
 integrable platform OpenFOAM, which was used to solve the problems described
-above. Being a really handy tool, it allows automate the process of manually
+above.
+Being a really handy tool, it allows automate the process of manually
 changing the solid model for each valve lift!
 
 ## Block diagramm of the algorythm
 ![blockDiagram](https://github.com/StasF1/intakePipe/wiki/src/images/blockDiagram-0.2.png)
+
 
 # Requirements
 1. **OpenFOAM** - tested using **v6** and **v7**
@@ -25,26 +28,33 @@ changing the solid model for each valve lift!
 
 
 # Usage
+## Pre-Process
+- Prepare the pipe geometry and save it as *inlet.stl*, *outlet.stl*,
+*valve.stl*, *walls.stl* at *projectTemplate/design0/geometry/*.
+- Edit OpenFOAM case settings at *projectTemplate/design0/geometry/stroke_2mm/*
+    if required.
+- Open ParaView and load the state *swirlNo.pvsm* using ''`Load State...`''
+    from *projectTemplate/postProcessing/swirlNo/*.
+    Select *Swirl number* filter and edit
+    *postProcessing/swirlNo/swirlNoFilter.py* filter path (**must full**!).
+    Save *swirlNo.pvsm* replacing the original one with the
+    ''`Save State...`''.
+
 ## Run
-Directory *run/* has got three different versions of the geometry. In the
-*strokeDict* you can set some settings of the compilation (initial and finite
-strokes or calculation step). To start compilation of all three version run the
-script *makeDesigns* (which running the folowing script *makeStrokes* in all
-*design#/* folders). To start compilation in specified version folder run a
-*makeStrokes* script in the *design#/*. Every version folder (*design#/*) has
-got a *stroke_0mm/* folder where you can set anything and the *geometry/*,
-where *.stl* files located.
+Directory *projectTemplate/* has got three different versions of the geometry.
+In the *projectDict* you can set some settings of the run (initial, finite
+valve strokes and stroke step).
+The *makeStrokes* script clones the parent *stroke_2mm/* OpenFOAM case.
+Every stroke will have its own case *projectTemplate/design<i>/stroke_<h>mm/*
+(where <h> is valve stroke in millimetres).
 
-The *makeStrokes* script copies the *stroke_0mm/* directory, moves the valve to
-make the new stroke, generates the mesh and solves the case for that stroke with
-step. Every stroke will have its case folder *run/design#/stroke_<stroke>mm/*
-(where <stroke> is stroke in millimetres).
-
-**Before running** the script open ParaView and load the state *case.pvsm* from
-*design#/stroke_0mm/* with ''`Load State...`''. Select *Swirl number* filter
-and change path to the *swirlNumberFilter.py* (the path **must** be **full**!),
-which is placed in *postProcessing/* directoty. Save *case.pvsm* replacing the
-original one with the ''`Save State...`''.
+- To calculate all three design versions: run a *makeDesigns* script (which
+    runs the folowing *makeStrokes* script in all *design<i>/* folders) and
+    then run the `foamRunTutorials` command.
+- To calculate specified design only: run a *makeStrokes* script in the
+    *design<i>/* and then run the `foamRunTutorials` command.
+    Every design folder must have a *stroke_2mm/* parent OpenFOAM case and a
+    *geometry/* folder (with *.stl* files - ).
 
 **⚠ In case if you need to recompilate smth**:
 
@@ -53,8 +63,8 @@ not need to rerun the whole project. So, if you need to recompilate:
 - all calculations for a certain stroke:
     ```bash
     shopt -s extglob
-    rm -r !("stroke_0mm"|"geometry"|"makeStrokes")
-    stroke_0mm/./Allclean && ./makeStrokes && foamRunTutorials -skipFirst
+    rm -r !("stroke_2mm"|"geometry"|"makeStrokes")
+    stroke_2mm/./Allclean && ./makeStrokes && foamRunTutorials -skipFirst
     ```
 - only a certain stroke:
     ```bash
@@ -63,23 +73,24 @@ not need to rerun the whole project. So, if you need to recompilate:
 
 ## Post-process
 ### Python 3
-OpenFOAM post-processing functions create _postProcessing/_ folder with data
-files. To initiate calculation flow coeffiecients of intake pipes using .dat
-files run *postProcessing.py* python script (in the directory
-*postProcessing/flowCoefficient/*). It also considers three versions of minimal
-flow area (from I to III on the picture or when it moved to the *d_2* diameter).
-
+OpenFOAM post-processing functions create a _postProcessing/_ folder with data
+files.
+To initiate calculation flow coeffiecients of intake pipes using .dat files run
+*dischargeCoefficient.py* python script (in the directory
+*projectTemplate/postProcessing/dischargeCoefficient/*) after set geometry
+parameters at *dischargeCoefficientDict.py*.
+It also considers three versions of minimal flow area (from I to III on the
+picture or when it moved to the *d_2* diameter).
 ![valveStep](https://github.com/StasF1/intakePipe/wiki/src/images/valveStep.png)
 
-As a result we have got set of plots and one from them is a plot with flow
-coefficent for 3 versions of intake pipes:
-
+As a result, there is a graph with discharge coefficient plots for three design
+versions of an intake pipe:
 ![mu](https://github.com/StasF1/intakePipe/wiki/src/images/mu.png)
 
 ### ParaView
-_postProcessing/swirlNumber_ folder has got a *swirlNumber.pvsm* ParaView state
-file when you open it in the ParaView using ''`Load State...`'' it will
-calculate swirl numbers in the cylinder automatically.
+_dischargeCoefficient/postProcessing/swirlNo/_ folder has got a *swirlNo.pvsm*
+ParaView state file when you open it in the ParaView using ''`Load State...`''
+it will calculate swirl numbers in the cylinder automatically.
 
 ---
 ⚠ **In case if you need to make a simulation with another pipe geometry** -
@@ -89,7 +100,7 @@ read [**Wiki**](https://github.com/StasF1/intakePipe/wiki/Home).
 # Structure
 ```gitignore
 intakePipe-0.3
-└── run                 # project folder (template)
+└── projectTemplate     # project folder
     ├── design0
     │   ├── stroke_2mm  # default/parent case w/ settings
     │   └── geometry    # .stl files
@@ -99,5 +110,5 @@ intakePipe-0.3
     │   └── geometry
     └── postProcessing  # python3 post-processing scripts
         ├── dischargeCoefficient
-        └── swirlNumber # python ParaView filter & state file
+        └── swirlNo     # python ParaView filter & state file
 ```

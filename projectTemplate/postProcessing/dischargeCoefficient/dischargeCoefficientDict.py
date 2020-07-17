@@ -5,7 +5,7 @@
   \\  /    A nd           | Copyright (C) 2018-2020 Stanislau Stasheuski
    \\/     M anipulation  |
 ----------------------------------------------------------------------------'''
-exec(open('../.././strokeDict').read())
+exec(open('../.././projectDict').read())
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * #
 
 # Boundary conditions

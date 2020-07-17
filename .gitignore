@@ -22,9 +22,9 @@ processor*/
 VTK/
 
 # Folders – local
-run/**/postProcessing/
-!run/postProcessing/
-run/**/stroke_*mm
-run/**/makeStrokes
-!run/design0/stroke_2mm
-!run/design0/makeStrokes
+projectTemplate/**/postProcessing/
+!projectTemplate/postProcessing/
+projectTemplate/**/stroke_*mm
+projectTemplate/**/makeStrokes
+!projectTemplate/design0/stroke_2mm
+!projectTemplate/design0/makeStrokes
