@@ -1,0 +1,40 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+# Set valve stroke
+stroke=-0.002 #[m]
+
+touch ${PWD##*/}.foam
+
+# Scale & transfer .stl files
+mkdir -p constant/triSurface
+
+runApplication surfaceTransformPoints -translate '(1 0 0)'\
+    -scale '(0.001 0.001 0.001)'\
+    ../geometry/inlet.stl constant/triSurface/inlet.stl
+runApplication -a surfaceTransformPoints -scale '(0.001 0.001 0.001)'\
+    ../geometry/outlet.stl constant/triSurface/outlet.stl
+runApplication -a surfaceTransformPoints -scale '(0.001 0.001 0.001)'\
+    ../geometry/valve.stl constant/triSurface/valve.stl
+runApplication -a surfaceTransformPoints -scale '(0.001 0.001 0.001)'\
+    ../geometry/walls.stl constant/triSurface/walls.stl
+
+# Move valve
+runApplication -a surfaceTransformPoints -translate "(0 0 $stroke)"\
+    constant/triSurface/valve.stl constant/triSurface/valve.stl
+
+# Creare background mesh
+runApplication blockMesh
+
+# Change cylinder where mesh size will be reduced
+sed -i "s/stroke         -0.002/stroke         $stroke/g"\
+    system/snappyHexMeshDict
+runApplication surfaceFeatures
+runApplication snappyHexMesh -overwrite
+
+# runApplication checkMesh
+
+#------------------------------------------------------------------------------

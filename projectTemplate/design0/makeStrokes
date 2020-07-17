@@ -1,0 +1,58 @@
+#!/bin/bash
+#----------------------------------*-sh-*--------------------------------------
+# =========                 |
+# \\      /  F ield         | OpenFOAM: Addition to OpenFOAM v6
+#  \\    /   O peration     | Website:  https://github.com/StasF1/intakePipe
+#   \\  /    A nd           | Copyright (C) 2018-2020 Stanislau Stasheuski
+#    \\/     M anipulation  |
+#------------------------------------------------------------------------------# License
+#     This file is not part of OpenFOAM, but part of intakePipe – OpenFOAM
+#     addition.
+#
+#     intakePipe (like OpenFOAM) is free software: you can redistribute it 
+#     and/or modify it under the terms of the GNU General Public License as
+#     published by the Free Software Foundation, either version 3 of the License,
+#     or (at your option) any later version.
+#   
+#     intakePipe (like OpenFOAM) is distributed in the hope that it will be
+#     useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#     See the GNU General Public License for more details.
+#   
+#     You should have received a copy of the GNU General Public License
+#     along with this repository. If not, see <http://www.gnu.org/licenses/>
+#
+# File
+#     makeStrokes
+#
+# Description
+#     Run design of the inlet channel geometry with a valve stroke increasing
+#     by a step
+#
+#------------------------------------------------------------------------------
+cd ${0%/*} || exit 1    # Run from this directory
+
+source ../projectDict
+
+# Create valve strokes cases
+for (( h = $STROKE_INIT; h <= $STROKE_FINITE; h += $STROKE_STEP ))
+do
+    printf 'Running makeStrokes script on %s\n' "$PWD/stroke_${h}mm"
+
+    if [ $h -eq $STROKE_INIT ]
+    then
+        # Rename initial stroke folder if required
+        if [ $STROKE_INIT -ne 2 ]
+        then
+            mv stroke_2mm/ stroke_${STROKE_INIT}mm/
+        fi
+    else
+        # Create stroke folder by copying the initial stroke folder
+        mkdir -p stroke_${h}mm && cp -a stroke_${STROKE_INIT}mm/* stroke_${h}mm
+    fi
+
+    # Set stroke variable
+    sed -i "s/stroke=-0.00$STROKE_INIT/stroke=-0.00$h/g" stroke_${h}mm/Allmesh
+done
+
+#------------------------------------------------------------------------------

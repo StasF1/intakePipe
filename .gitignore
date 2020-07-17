@@ -14,6 +14,7 @@ point*
 __pycache__/
 0.*/
 [1-9]*
+dynamicCode/
 extendedFeatureEdgeMesh/
 polyMesh/
 triSurface/
@@ -21,8 +22,9 @@ processor*/
 VTK/
 
 # Folders – local
-run/**/postProcessing/
-run/**/0
-! run/ver1/0
-run/**/verRun
-! run/ver1/verRun
+projectTemplate/**/postProcessing/
+!projectTemplate/postProcessing/
+projectTemplate/**/stroke_*mm
+projectTemplate/**/makeStrokes
+!projectTemplate/design0/stroke_2mm
+!projectTemplate/design0/makeStrokes
