@@ -34,7 +34,7 @@ from math import pi
 import numpy as np
 import matplotlib.pyplot as plt
 
-from dischargeCoefficientDict import *
+exec(open("../.././projectDict").read())
 exec(open("./createArrays.py").read())
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 

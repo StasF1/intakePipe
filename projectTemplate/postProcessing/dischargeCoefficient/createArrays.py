@@ -5,9 +5,9 @@ stroke = np.arange(STROKE_INIT,
 
 # Lists
 pAreaAverage_inlet = []
+UAreaAverage_inlet = []
 phiSum_inlet = []
 valveFlowArea = []
-totalPressure = []
 mu = []
 
 # Get data from the .dat files
