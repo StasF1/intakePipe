@@ -19,11 +19,11 @@ for i in range(DESIGN_NO + 1):
     for h in range(len(stroke)):
         pAreaAverage_inlet_.append(
             np.loadtxt(
-                f'../../run/design{i}/stroke_{stroke[h]}mm/postProcessing/patchAverage(p,name=inlet)/0/surfaceFieldValue.dat')[1])
+                f'../../design{i}/stroke_{stroke[h]}mm/postProcessing/patchAverage(p,name=inlet)/0/surfaceFieldValue.dat')[1])
 
         phiSum_inlet_.append(
             abs(np.loadtxt(
-                f'../../run/design{i}/stroke_{stroke[h]}mm/postProcessing/flowRatePatch(name=inlet)/0/surfaceFieldValue.dat')[1]))
+                f'../../design{i}/stroke_{stroke[h]}mm/postProcessing/flowRatePatch(name=inlet)/0/surfaceFieldValue.dat')[1]))
 
     # Append design lists to the project list
     phiSum_inlet.append(np.array(phiSum_inlet_))

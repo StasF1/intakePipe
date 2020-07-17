@@ -23,6 +23,7 @@ VTK/
 
 # Folders – local
 run/**/postProcessing/
+!run/postProcessing/
 run/**/stroke_*mm
 run/**/makeStrokes
 !run/design0/stroke_2mm

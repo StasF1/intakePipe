@@ -89,15 +89,15 @@ read [**Wiki**](https://github.com/StasF1/intakePipe/wiki/Home).
 # Structure
 ```gitignore
 intakePipe-0.3
-├── run
-│   ├── design0
-│   │   ├── stroke_2mm     # default case
-│   │   └── geometry       # .stl files
-│   ├── design1
-│   │   └── geometry
-│   └── design2
-│       └── geometry
-└── postProcessing
-    ├── flowCoefficient    # Python3 script to make flow coeffiecient plot
-    └── swirlNumber        # ParaView filter & state file
+└── run                 # project folder (template)
+    ├── design0
+    │   ├── stroke_2mm  # default/parent case w/ settings
+    │   └── geometry    # .stl files
+    ├── design1
+    │   └── geometry
+    ├── design2
+    │   └── geometry
+    └── postProcessing  # python3 post-processing scripts
+        ├── dischargeCoefficient
+        └── swirlNumber # python ParaView filter & state file
 ```

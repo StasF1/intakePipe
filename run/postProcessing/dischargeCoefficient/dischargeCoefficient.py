@@ -24,7 +24,7 @@ License
     along with this repository. If not, see <http://www.gnu.org/licenses/>
 
 File
-    postProcessing.py
+    dischargeCoefficient.py
 
 Description
     Calculate flow coefficient for different valve strokes
@@ -34,7 +34,7 @@ from math import pi
 import numpy as np
 import matplotlib.pyplot as plt
 
-from postProcessingDict import *
+from dischargeCoefficientDict import *
 exec(open("./createArrays.py").read())
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
@@ -115,7 +115,7 @@ plt.legend(loc='best', fontsize=12)
 plt.xlabel('Stroke, mm', fontsize=12)
 plt.ylabel('$\mu$', fontsize=12)
 
-plt.savefig('mu.png')
+plt.savefig('../mu.png')
 
 # exit(plt.show())
 
