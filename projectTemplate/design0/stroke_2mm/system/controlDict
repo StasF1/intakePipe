@@ -47,11 +47,11 @@ runTimeModifiable true;
 
 functions
 {
+    #includeFunc residuals(p,U,k,omega)
+
     #includeFunc staticPressure(name=inlet) //[Pa]
     #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
     #includeFunc mag(U)
-
-    //TODO: Swirl number calculation using OpenFOAM (instead of ParaView)
 
     Mach
     {
@@ -91,19 +91,9 @@ functions
         #};
     }
 
-    residuals
-    {
-        #includeEtc "caseDicts/postProcessing/numerical/residuals.cfg"
-        fields
-        (
-            p
-            U
-            k
-            omega
-        );
-    }
+    //TODO: Swirl number calculation using OpenFOAM (instead of ParaView)
 
-    // Write field amplutude values
+    // Write amplutude field values
     read
     {
         type            readFields;
