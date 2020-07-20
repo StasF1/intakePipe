@@ -12,8 +12,15 @@ runApplication $(getApplication)
 #- Run parallel
 # runApplication decomposePar -force
 # runParallel $(getApplication)
-# runApplication reconstructPar -latestTime\
-#     -fields '(p phi static(p) total(p) U)'
+# runApplication reconstructPar -latestTime -fields\
+#     '(
+#         p
+#         static(p)
+#         total(p)
+#         phi
+#         U
+#         mag(U)
+#     )'
 
 #- Post process
 runApplication postProcess -latestTime -funcs\

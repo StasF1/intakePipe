@@ -47,9 +47,9 @@ runTimeModifiable true;
 
 functions
 {
-    #includeFunc mag(U)
     #includeFunc staticPressure(name=inlet) //[Pa]
     #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
+    #includeFunc mag(U)
 
     //TODO: Swirl number calculation using OpenFOAM (instead of ParaView)
 
@@ -87,9 +87,7 @@ functions
         #};
         codeWrite
         #{
-            volScalarField& Ma = mesh().lookupObjectRef<volScalarField>("Ma");
-
-            Ma.write();
+            mesh().lookupObjectRef<volScalarField>("Ma").write();
         #};
     }
 
@@ -116,7 +114,6 @@ functions
         (
             static(p)
             total(p)
-            Ma
         );
     }
     fieldAmplutudes
