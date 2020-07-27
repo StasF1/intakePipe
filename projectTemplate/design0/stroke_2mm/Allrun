@@ -14,12 +14,9 @@ runApplication $(getApplication)
 # runParallel $(getApplication)
 # runApplication reconstructPar -latestTime -fields\
 #     '(
-#         p
-#         static(p)
-#         total(p)
+#         p static(p) total(p)
 #         phi
-#         U
-#         mag(U)
+#         U mag(U)
 #     )'
 
 #- Post process

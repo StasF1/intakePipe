@@ -9,6 +9,10 @@ point*
 *.foam
 *.dat
 *.png
+*(p)
+Ma
+L
+mag(U)
 
 # Folders - anywhere
 __pycache__/

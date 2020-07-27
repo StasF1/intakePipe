@@ -53,45 +53,7 @@ functions
     #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
     #includeFunc mag(U)
 
-    Mach
-    {
-        type            coded;
-        libs            ("libutilityFunctionObjects.so");
-        name            MachNo;
-        executeControl  timeStep;
-        writeControl    writeTime;
-        codeRead
-        #{
-            volScalarField* Ma =
-                new volScalarField
-                (
-                    IOobject("Ma", mesh().time().timeName(), mesh()),
-                    mesh(),
-                    dimensionedScalar(dimless, 0)
-                );
-            Ma->store();
-        #};
-        codeExecute
-        #{
-            // Specific heat ratio and kinematic atmospheric pressure
-            const dimensionedScalar gamma(dimless, 1.4);
-            const dimensionedScalar pAtm(dimPressure, 101325);
-            const dimensionedScalar rho(dimDensity, 1.2);
-
-            // Read fields
-            const volVectorField& U = mesh().lookupObject<volVectorField>("U");
-            const volScalarField& p = mesh().lookupObject<volScalarField>("p");
-            volScalarField& Ma = mesh().lookupObjectRef<volScalarField>("Ma");
-
-            Ma = mag(U)/sqrt(gamma*(p + pAtm/rho));
-        #};
-        codeWrite
-        #{
-            mesh().lookupObjectRef<volScalarField>("Ma").write();
-        #};
-    }
-
-    //TODO: Swirl number calculation using OpenFOAM (instead of ParaView)
+    #includeFunc MachNoIncompressible
 
     // Write amplutude field values
     read
@@ -102,8 +64,7 @@ functions
         writeInterval   1;
         fields
         (
-            static(p)
-            total(p)
+            static(p) total(p)
         );
     }
     fieldAmplutudes
@@ -117,9 +78,7 @@ functions
         operation       magnitude;
         fields
         (
-            p
-            static(p)
-            total(p)
+            p static(p) total(p)
             U
             Ma
         );
