@@ -16,7 +16,7 @@ name            angularMomentum;
 
 codeWrite
 #{
-    const dimensionedScalar rhoRef(dimDensity, 1.2);
+    const dimensionedScalar rhoInf(dimDensity, 1.2);
 
     const volVectorField& U = mesh().lookupObject<volVectorField>("U");
 
@@ -30,7 +30,7 @@ codeWrite
 
     L.ref() =
     (
-        mesh().C() ^ U*mesh().V()*rhoRef
+        mesh().C() ^ U*mesh().V()*rhoInf
     );
     L.correctBoundaryConditions();
 

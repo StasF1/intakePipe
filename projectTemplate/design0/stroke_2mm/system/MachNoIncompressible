@@ -29,17 +29,16 @@ codeRead
 
 codeExecute
 #{
-    // Specific heat ratio and kinematic atmospheric pressure
-    const dimensionedScalar gamma(dimless, 1.4);
     const dimensionedScalar pRef(dimPressure, 101325);
-    const dimensionedScalar rhoRef(dimDensity, 1.2);
+    const dimensionedScalar rhoInf(dimDensity, 1.2);
+    const dimensionedScalar gamma(dimless, 1.4);
 
     // Read fields
     const volVectorField& U = mesh().lookupObject<volVectorField>("U");
     const volScalarField& p = mesh().lookupObject<volScalarField>("p");
     volScalarField& Ma = mesh().lookupObjectRef<volScalarField>("Ma");
 
-    Ma = mag(U)/sqrt(gamma*(p + pRef/rhoRef));
+    Ma = mag(U)/sqrt(gamma*(p + pRef/rhoInf));
 #};
 
 codeWrite
