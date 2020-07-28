@@ -49,24 +49,11 @@ functions
 {
     #includeFunc residuals(p,U,k,omega)
 
-    #includeFunc staticPressure(name=inlet) //[Pa]
-    #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
-    #includeFunc mag(U)
+    #includeFunc staticPressure //[Pa]
+    #includeFunc totalPressureIncompressible //[mˆ2/sˆ2], p/rho
 
     #includeFunc MachNoIncompressible
 
-    // Write amplutude field values
-    read
-    {
-        type            readFields;
-        libs            ("libfieldFunctionObjects.so");
-        writeControl    timeStep;
-        writeInterval   1;
-        fields
-        (
-            static(p) total(p)
-        );
-    }
     fieldAmplutudes
     {
         type            fieldMinMax;
@@ -83,6 +70,8 @@ functions
             Ma
         );
     }
+
+    #includeFunc angularMomentum
 }
 
 // ************************************************************************* //

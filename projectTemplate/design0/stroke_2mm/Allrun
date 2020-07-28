@@ -15,15 +15,18 @@ runApplication $(getApplication)
 # runApplication reconstructPar -latestTime -fields\
 #     '(
 #         p static(p) total(p)
-#         phi
-#         U mag(U)
+#         U
+#         L
 #     )'
 
 #- Post process
 runApplication postProcess -latestTime -funcs\
     '(
+        mag(U)
         patchAverage(p,static(p),total(p),mag(U),name=inlet)
         flowRatePatch(name=inlet)
+        mag(L)
+        volIntegrateMagAngularMomentum
     )'
 
 #------------------------------------------------------------------------------
