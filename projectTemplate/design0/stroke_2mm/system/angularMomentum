@@ -10,42 +10,31 @@ libs            ("libutilityFunctionObjects.so");
 
 type            coded;
 
-executeControl  timeStep;
 writeControl    writeTime;
 
 name            angularMomentum;
 
-codeRead
-#{
-    volVectorField* L =
-        new volVectorField
-        (
-            IOobject("L", mesh().time().timeName(), mesh()),
-            mesh(),
-            dimensionedVector(dimLength*dimVelocity*dimMass, Zero),
-            calculatedFvPatchField<scalar>::typeName
-        );
-    L->store();
-#};
-
-codeExecute
+codeWrite
 #{
     const dimensionedScalar rhoRef(dimDensity, 1.2);
 
-    // Read fields
     const volVectorField& U = mesh().lookupObject<volVectorField>("U");
-    volVectorField& L = mesh().lookupObjectRef<volVectorField>("L");
+
+    volVectorField L
+    (
+        IOobject("L", mesh().time().timeName(), mesh()),
+        mesh(),
+        dimensionedVector(dimLength*dimVelocity*dimMass, Zero),
+        calculatedFvPatchField<scalar>::typeName
+    );
 
     L.ref() =
     (
         mesh().C() ^ U*mesh().V()*rhoRef
     );
     L.correctBoundaryConditions();
-#};
 
-codeWrite
-#{
-    mesh().lookupObjectRef<volVectorField>("L").write();
+    L.write();
 #};
 
 // ************************************************************************* //
