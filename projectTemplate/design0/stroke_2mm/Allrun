@@ -12,14 +12,21 @@ runApplication $(getApplication)
 #- Run parallel
 # runApplication decomposePar -force
 # runParallel $(getApplication)
-# runApplication reconstructPar -latestTime\
-#     -fields '(p phi static(p) total(p) U)'
+# runApplication reconstructPar -latestTime -fields\
+#     '(
+#         p static(p) total(p)
+#         U
+#         L
+#     )'
 
 #- Post process
 runApplication postProcess -latestTime -funcs\
     '(
+        mag(U)
         patchAverage(p,static(p),total(p),mag(U),name=inlet)
         flowRatePatch(name=inlet)
+        mag(L)
+        volIntegrateMagAngularMomentum
     )'
 
 #------------------------------------------------------------------------------

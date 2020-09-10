@@ -22,7 +22,7 @@ changing the solid model for each valve lift!
 
 
 # Requirements
-1. **OpenFOAM** - tested using **v6** and **v7**
+1. **OpenFOAM** - tested using **v6**, **v7** and **v8**
 1. **Python3** with **NumPy** & **Matplotlib** libraries - tested using Python
     *v3.7.4* with NumPy *v1.8.0rc1* & Matplotlib *v1.3.1*
 

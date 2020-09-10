@@ -1,0 +1,40 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+libs            ("libutilityFunctionObjects.so");
+
+type            coded;
+
+writeControl    writeTime;
+
+name            angularMomentum;
+
+codeWrite
+#{
+    const dimensionedScalar rhoInf(dimDensity, 1.2);
+
+    const volVectorField& U = mesh().lookupObject<volVectorField>("U");
+
+    volVectorField L
+    (
+        IOobject("L", mesh().time().timeName(), mesh()),
+        mesh(),
+        dimensionedVector(dimLength*dimVelocity*dimMass, Zero),
+        calculatedFvPatchField<scalar>::typeName
+    );
+
+    L.ref() =
+    (
+        mesh().C() ^ U*mesh().V()*rhoInf
+    );
+    L.correctBoundaryConditions();
+
+    L.write();
+#};
+
+// ************************************************************************* //

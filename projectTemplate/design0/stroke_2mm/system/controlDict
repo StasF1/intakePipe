@@ -47,78 +47,13 @@ runTimeModifiable true;
 
 functions
 {
-    #includeFunc mag(U)
-    #includeFunc staticPressure(name=inlet) //[Pa]
-    #includeFunc totalPressureIncompressible(name=inlet) //[mˆ2/sˆ2], p/rho
+    #includeFunc residuals(p,U,k,omega)
 
-    //TODO: Swirl number calculation using OpenFOAM (instead of ParaView)
+    #includeFunc staticPressure //[Pa]
+    #includeFunc totalPressureIncompressible //[mˆ2/sˆ2], p/rho
 
-    Mach
-    {
-        type            coded;
-        libs            ("libutilityFunctionObjects.so");
-        name            MachNo;
-        executeControl  timeStep;
-        writeControl    writeTime;
-        codeRead
-        #{
-            volScalarField* Ma =
-                new volScalarField
-                (
-                    IOobject("Ma", mesh().time().timeName(), mesh()),
-                    mesh(),
-                    dimensionedScalar(dimless, 0)
-                );
-            Ma->store();
-        #};
-        codeExecute
-        #{
-            // Specific heat ratio and kinematic atmospheric pressure
-            const dimensionedScalar gamma(dimless, 1.4);
-            const dimensionedScalar pAtm(dimPressure, 101325);
-            const dimensionedScalar rho(dimDensity, 1.2);
+    #includeFunc MachNoIncompressible
 
-            // Read fields
-            const volVectorField& U = mesh().lookupObject<volVectorField>("U");
-            const volScalarField& p = mesh().lookupObject<volScalarField>("p");
-            volScalarField& Ma = mesh().lookupObjectRef<volScalarField>("Ma");
-
-            Ma = mag(U)/sqrt(gamma*(p + pAtm/rho));
-        #};
-        codeWrite
-        #{
-            volScalarField& Ma = mesh().lookupObjectRef<volScalarField>("Ma");
-
-            Ma.write();
-        #};
-    }
-
-    residuals
-    {
-        #includeEtc "caseDicts/postProcessing/numerical/residuals.cfg"
-        fields
-        (
-            p
-            U
-            k
-            omega
-        );
-    }
-
-    // Write field amplutude values
-    read
-    {
-        type            readFields;
-        libs            ("libfieldFunctionObjects.so");
-        writeControl    timeStep;
-        writeInterval   1;
-        fields
-        (
-            static(p)
-            total(p)
-            Ma
-        );
-    }
     fieldAmplutudes
     {
         type            fieldMinMax;
@@ -130,13 +65,13 @@ functions
         operation       magnitude;
         fields
         (
-            p
-            static(p)
-            total(p)
+            p static(p) total(p)
             U
             Ma
         );
     }
+
+    #includeFunc angularMomentum
 }
 
 // ************************************************************************* //
