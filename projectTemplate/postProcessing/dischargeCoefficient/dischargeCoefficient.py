@@ -30,9 +30,11 @@ Description
     Calculate flow coefficient for different valve strokes
 
 ---------------------------------------------------------------------------'''
-from math import pi
+import re
 import numpy as np
 import matplotlib.pyplot as plt
+
+from math import pi
 
 exec(open("../.././projectDict").read())
 exec(open("./createArrays.py").read())
@@ -42,71 +44,72 @@ sind = lambda x : np.sin(np.deg2rad(x))
 cosd = lambda x : np.cos(np.deg2rad(x))
 tand = lambda x : np.tan(np.deg2rad(x))
 
-# Calculating minimal intake area
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#- Converting data to metres
-d_pipe *= 1e-3
-d_2Pipe *= 1e-3
-d_1 *= 1e-3
-d_2 *= 1e-3
-d_bar *= 1e-3
+#- Convert data to metres
+PISTON_STROKE *= 1e-3
+PISTON_BORE *= 1e-3
+D_PIPE *= 1e-3
+D_2PIPE *= 1e-3
+D_1 *= 1e-3
+D_2 *= 1e-3
+D_BAR *= 1e-3
 stroke = stroke*1e-3
 
+# Minimal inlet area
+# ~~~~~~~~~~~~~~~~~~
 #- Critical cuts
-h_crI = (d_pipe - d_1)/sind(2*theta)
-h_crII = (d_2Pipe - d_1)/sind(2*theta)
+h_crI = (D_PIPE - D_1)/sind(2*THETA)
+h_crII = (D_2PIPE - D_1)/sind(2*THETA)
 
-#- Minimum pipe area 
-criticalArea = pi*d_pipe**2/4 - pi*d_bar**2/4
+#- Minimal pipe area
+critical_area = pi*D_PIPE**2/4 - pi*D_BAR**2/4
 
 for h in range(len(stroke)):
     if (stroke[h] <= h_crI):
         ''' Cut I '''
         cut='I'
-        valveFlowArea.append(
+        valve_flow_area.append(
             pi*stroke[h]
-            *cosd(theta)
-            *(d_pipe - stroke[h]*sind(theta)*cosd(theta)))
+            *cosd(THETA)
+            *(D_PIPE - stroke[h]*sind(THETA)*cosd(THETA)))
 
     elif (stroke[h] > h_crI) and (stroke[h] <= h_crII):
         ''' Cut II '''
         cut='II'
-        valveFlowArea.append(
+        valve_flow_area.append(
             pi*stroke[h]
-            *cosd(theta)
-            *(d_1 + stroke[h]*sind(theta)*cosd(theta)))
+            *cosd(THETA)
+            *(D_1 + stroke[h]*sind(THETA)*cosd(THETA)))
 
     else:
         ''' Cut III '''
         cut='III'
-        valveFlowArea.append(
+        valve_flow_area.append(
             pi/4
-            *(d_2Pipe + d_1)
-            *np.sqrt(pow(d_2Pipe - d_1, 2)
-                     + pow(2*stroke[h] - (d_2Pipe - d_1)*tand(theta), 2)))
+            *(D_2PIPE + D_1)
+            *np.sqrt(pow(D_2PIPE - D_1, 2)
+                     + pow(2*stroke[h] - (D_2PIPE - D_1)*tand(THETA), 2)))
 
     print(f'Cut type for stroke {int(stroke[h]*1e+03)} mm: {cut}')
 
-    if (valveFlowArea[h] > criticalArea):
-        valveFlowArea[h] = criticalArea
+    if (valve_flow_area[h] > critical_area):
+        valve_flow_area[h] = critical_area
 
 
-# Calculating flow coefficients
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Discharge coefficient
+# ~~~~~~~~~~~~~~~~~~~~~
 plt.figure().suptitle('Discharge coefficient',
                       fontweight='bold',
                       fontsize=14)
 
-for i in range(DESIGN_NO + 1):
-    deltaP = pAreaAverage_inlet[i] + UAreaAverage_inlet[i]**2/2
-
-    mu.append(phiSum_inlet[i]
-              /valveFlowArea/np.sqrt(2*deltaP))
+for n in range(DESIGN_NO + 1):
+    mu.append(phi_inlet[n]
+              /valve_flow_area
+              /np.sqrt(2*p_inlet[n] + U_inlet[n]**2))
 
     plt.plot(stroke*1e+3,
-             mu[i],
+             mu[n],
              linewidth=2,
-             label=f'design{i}')
+             label=f'design{n}')
 
 plt.grid(True)
 plt.legend(loc='best', fontsize=12)
@@ -114,6 +117,29 @@ plt.xlabel('Stroke, mm', fontsize=12)
 plt.ylabel('$\mu$', fontsize=12)
 
 plt.savefig('../mu.png')
+
+
+# Swirl number
+# ~~~~~~~~~~~~
+plt.figure().suptitle('Swirl number',
+                      fontweight='bold',
+                      fontsize=14)
+
+for n in range(DESIGN_NO + 1):
+    D_n.append(2*PISTON_STROKE*rhoInf*L[n]
+               /phi_inlet[n]/V_c[n])
+
+    plt.plot(stroke*1e+3,
+             pi/2*PISTON_BORE/PISTON_STROKE*D_n[n],
+             linewidth=2,
+             label=f'design{n}')
+
+plt.grid(True)
+plt.legend(loc='best', fontsize=12)
+plt.xlabel('Stroke, mm', fontsize=12)
+plt.ylabel('$D_c$', fontsize=12)
+
+plt.savefig('../D_n.png')
 
 # exit(plt.show())
 

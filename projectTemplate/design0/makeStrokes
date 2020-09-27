@@ -51,6 +51,11 @@ do
         mkdir -p stroke_${h}mm && cp -a stroke_${STROKE_INIT}mm/* stroke_${h}mm
     fi
 
+    # Set air density in post-procesing files
+    sed -i "s/dimDensity, 1.2/dimDensity, $rhoInf/g"\
+        stroke_${h}mm/system/angularMomentum\
+        stroke_${h}mm/system/MachNoIncompressible
+
     # Set stroke variable
     sed -i "s/stroke=-0.00$STROKE_INIT/stroke=-0.00$h/g" stroke_${h}mm/Allmesh
 done
