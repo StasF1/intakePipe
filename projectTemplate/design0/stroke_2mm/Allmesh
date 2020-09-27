@@ -26,7 +26,7 @@ runApplication -a surfaceTransformPoints -scale '(0.001 0.001 0.001)'\
 runApplication -a surfaceTransformPoints -translate "(0 0 $stroke)"\
     constant/triSurface/valve.stl constant/triSurface/valve.stl
 
-# Creare background mesh
+# Create background mesh
 runApplication blockMesh
 
 # Change cylinder where mesh size will be reduced
@@ -34,6 +34,13 @@ sed -i "s/stroke         -0.002/stroke         $stroke/g"\
     system/snappyHexMeshDict
 runApplication surfaceFeatures
 runApplication snappyHexMesh -overwrite
+
+# Make cylinder axle coincide with the origin
+runApplication transformPoints -translate '(-0.0175 0 0)'
+
+# Create cylinder zones
+runApplication topoSet
+runApplication setsToZones
 
 # runApplication checkMesh
 
