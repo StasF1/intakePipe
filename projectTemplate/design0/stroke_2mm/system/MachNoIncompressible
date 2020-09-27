@@ -29,8 +29,8 @@ codeRead
 
 codeExecute
 #{
+    const dimensionedScalar rhoInf(dimDensity, 1.205); // set using projectDict
     const dimensionedScalar pRef(dimPressure, 101325);
-    const dimensionedScalar rhoInf(dimDensity, 1.2);
     const dimensionedScalar gamma(dimless, 1.4);
 
     // Read fields

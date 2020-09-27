@@ -16,7 +16,7 @@ name            angularMomentum;
 
 codeWrite
 #{
-    const dimensionedScalar rhoInf(dimDensity, 1.2);
+    const dimensionedScalar rhoInf(dimDensity, 1.205); // set using projectDict
 
     const volVectorField& U = mesh().lookupObject<volVectorField>("U");
 
@@ -28,11 +28,15 @@ codeWrite
         calculatedFvPatchField<scalar>::typeName
     );
 
+    Info<< "\nCalculate angular momentum field" << endl;
     L.ref() =
     (
         mesh().C() ^ U*mesh().V()*rhoInf
     );
     L.correctBoundaryConditions();
+
+    // Suppress Z component of the angular momentum
+    L.replace(vector::Z, 0.0);
 
     L.write();
 #};

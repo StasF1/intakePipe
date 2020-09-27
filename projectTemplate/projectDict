@@ -17,8 +17,20 @@ STROKE_FINITE=10 #[mm] finite valve stroke
 STROKE_STEP=1 #[mm] stroke step - only int type
 
 
-# Pipe & valve geometry (required for post-processing only)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Gas parameters
+# ~~~~~~~~~~~~~~
+rhoInf=1.205 #[kg/m^3] air density
+
+
+# Geometry parameters
+# ~~~~~~~~~~~~~~~~~~~
+#- Engine
+PISTON_STROKE=91 #[mm] piston stroke
+
+# PISTON_BORE=83 #[mm] piston bore /*unused variable*/
+
+
+#- Pipe & valve
 d_pipe=25.688 #[mm] minimal intake pipe diameter - see diameter for A point
 
 d_2Pipe=29.756 #[mm] valve neck chamfer diameter - see diameter for A1 point
