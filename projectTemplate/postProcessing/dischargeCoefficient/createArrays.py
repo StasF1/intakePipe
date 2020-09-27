@@ -31,5 +31,5 @@ for i in range(DESIGN_NO + 1):
 
     # Append design lists to the project list
     pAreaAverage_inlet.append(np.array(pAreaAverage_inlet_))
-    UAreaAverage_inlet.append(np.array(pAreaAverage_inlet_))
+    UAreaAverage_inlet.append(np.array(UAreaAverage_inlet_))
     phiSum_inlet.append(np.array(phiSum_inlet_))

@@ -29,7 +29,6 @@ PISTON_STROKE=91 #[mm] piston stroke
 
 # PISTON_BORE=83 #[mm] piston bore /*unused variable*/
 
-
 #- Pipe & valve
 d_pipe=25.688 #[mm] minimal intake pipe diameter - see diameter for A point
 

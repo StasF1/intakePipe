@@ -59,22 +59,22 @@ h_crII = (d_2Pipe - d_1)/sind(2*theta)
 #- Minimum pipe area 
 criticalArea = pi*d_pipe**2/4 - pi*d_bar**2/4
 
-for i in range(len(stroke)):
-    if (stroke[i] <= h_crI):
+for h in range(len(stroke)):
+    if (stroke[h] <= h_crI):
         ''' Cut I '''
         cut='I'
         valveFlowArea.append(
-            pi*stroke[i]
+            pi*stroke[h]
             *cosd(theta)
-            *(d_pipe - stroke[i]*sind(theta)*cosd(theta)))
+            *(d_pipe - stroke[h]*sind(theta)*cosd(theta)))
 
-    elif (stroke[i] > h_crI) and (stroke[i] <= h_crII):
+    elif (stroke[h] > h_crI) and (stroke[h] <= h_crII):
         ''' Cut II '''
         cut='II'
         valveFlowArea.append(
-            pi*stroke[i]
+            pi*stroke[h]
             *cosd(theta)
-            *(d_1 + stroke[i]*sind(theta)*cosd(theta)))
+            *(d_1 + stroke[h]*sind(theta)*cosd(theta)))
 
     else:
         ''' Cut III '''
@@ -83,12 +83,12 @@ for i in range(len(stroke)):
             pi/4
             *(d_2Pipe + d_1)
             *np.sqrt(pow(d_2Pipe - d_1, 2)
-                     + pow(2*stroke[i] - (d_2Pipe - d_1)*tand(theta), 2)))
+                     + pow(2*stroke[h] - (d_2Pipe - d_1)*tand(theta), 2)))
 
-    print(f'Cut type for stroke {int(stroke[i]*1e+03)} mm: {cut}')
+    print(f'Cut type for stroke {int(stroke[h]*1e+03)} mm: {cut}')
 
-    if (valveFlowArea[i] > criticalArea):
-        valveFlowArea[i] = criticalArea
+    if (valveFlowArea[h] > criticalArea):
+        valveFlowArea[h] = criticalArea
 
 
 # Calculating flow coefficients
@@ -101,8 +101,7 @@ for i in range(DESIGN_NO + 1):
     deltaP = pAreaAverage_inlet[i] + UAreaAverage_inlet[i]**2/2
 
     mu.append(phiSum_inlet[i]
-              /valveFlowArea
-              /np.sqrt(2*deltaP))
+              /valveFlowArea/np.sqrt(2*deltaP))
 
     plt.plot(stroke*1e+3,
              mu[i],
