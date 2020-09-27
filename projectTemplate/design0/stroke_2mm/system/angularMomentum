@@ -18,25 +18,25 @@ codeWrite
 #{
     const dimensionedScalar rhoInf(dimDensity, 1.205); // set using projectDict
 
-    const volVectorField& U = mesh().lookupObject<volVectorField>("U");
+    // Read fields
+    volVectorField U = mesh().lookupObject<volVectorField>("U");
+    volVectorField R = mesh().C();
+    R.replace(vector::Z, 0);
 
     volVectorField L
     (
         IOobject("L", mesh().time().timeName(), mesh()),
         mesh(),
-        dimensionedVector(dimLength*dimVelocity*dimMass, Zero),
+        dimensionedVector(dimLength*dimVelocity*dimDensity, Zero),
         calculatedFvPatchField<scalar>::typeName
     );
 
     Info<< "\nCalculate angular momentum field" << endl;
     L.ref() =
     (
-        mesh().C() ^ U*mesh().V()*rhoInf
+        R ^ U*rhoInf
     );
     L.correctBoundaryConditions();
-
-    // Suppress Z component of the angular momentum
-    L.replace(vector::Z, 0.0);
 
     L.write();
 #};
