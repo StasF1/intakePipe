@@ -20,7 +20,11 @@ codeWrite
 
     // Read fields
     volVectorField U = mesh().lookupObject<volVectorField>("U");
+    U.replace(vector::Y, 0);
+    U.replace(vector::Z, 0);
+
     volVectorField R = mesh().C();
+    R.replace(vector::X, 0);
     R.replace(vector::Z, 0);
 
     volVectorField L
