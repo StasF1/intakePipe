@@ -27,19 +27,19 @@ rhoInf=1.205 #[kg/m^3] air density
 #- Engine
 PISTON_STROKE=91 #[mm] piston stroke
 
-# PISTON_BORE=83 #[mm] piston bore /*unused variable*/
+PISTON_BORE=83 #[mm] piston bore
 
 #- Pipe & valve
-d_pipe=25.688 #[mm] minimal intake pipe diameter - see diameter for A point
+D_PIPE=25.688 #[mm] minimal intake pipe diameter - see diameter for A point
 
-d_2Pipe=29.756 #[mm] valve neck chamfer diameter - see diameter for A1 point
+D_2PIPE=29.756 #[mm] valve neck chamfer diameter - see diameter for A1 point
 
-d_bar=6.96 #[mm] bar diameter - see d_c
+D_BAR=6.96 #[mm] bar diameter - see d_c
 
-d_1=26.782 #[mm] valve diameter
+D_1=26.782 #[mm] valve diameter
 
-d_2=29.206 #[mm] head valve diameter
+D_2=29.206 #[mm] head valve diameter
 
-theta=45 #[deg] valve chamfer angle
+THETA=45 #[deg] valve chamfer angle
 
 # *****************************************************************************
