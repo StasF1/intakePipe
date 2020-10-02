@@ -17,7 +17,7 @@ FoamFile
 
 dimensions      [0 2 -3 0 0 0 0];
 
-internalField   uniform 16.412;
+internalField   uniform 22; // 0.09^(3/4)*k^(3/2)/0.07/PISTON_BORE
 
 boundaryField
 {
