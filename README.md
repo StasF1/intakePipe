@@ -24,7 +24,7 @@ the solid model for each valve lift!
 # Requirements
 1. **OpenFOAM** - tested using **v6**, **v7** and **v8**
 1. **Python3** with [NumPy](https://numpy.org/) and
-    [Matplotlib](https://matplotlib.org/) libraries (- )tested using Python
+    [Matplotlib](https://matplotlib.org/) libraries (tested using Python
     *v3.8.2* with NumPy *v1.18.3* & Matplotlib *v3.2.1*)
 
 
@@ -40,14 +40,14 @@ Directory *projectTemplate/* has got three different versions of the geometry.
 In the *projectDict* you can set some settings of the run (initial, finite
 valve strokes and stroke step).
 The *makeStrokes* script clones the parent *stroke_2mm/* OpenFOAM case.
-Every stroke will have its own case *projectTemplate/design<i>/stroke_<h>mm/*
-(where <h> is valve stroke in millimetres).
+Every stroke will have its own case *projectTemplate/design#/stroke_{h}mm/*
+(where {h} is valve stroke in millimetres).
 
 - To calculate all three design versions: run a *makeDesigns* script (which
-    runs the folowing *makeStrokes* script in all *design<i>/* folders) and
+    runs the folowing *makeStrokes* script in all *design{n}/* folders) and
     then run the `foamRunTutorials` command.
 - To calculate specified design only: run a *makeStrokes* script in the
-    *design<i>/* and then run the `foamRunTutorials` command.
+    *design{n}/* and then run the `foamRunTutorials` command.
     Every design folder must have a *stroke_2mm/* parent OpenFOAM case and a
     *geometry/* folder (with *.stl* files).
 
