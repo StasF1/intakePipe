@@ -1,7 +1,7 @@
 # git-ls-files --others --exclude-from=.git/info/exclude
 # Lines that start with '#' are comments.
 
-# Files - anywhere
+# Files – anywhere
 log.*
 *.gz
 cell*
@@ -13,7 +13,7 @@ point*
 Ma
 L
 
-# Folders - anywhere
+# Folders – anywhere
 __pycache__/
 0.*/
 [1-9]*
@@ -24,10 +24,11 @@ triSurface/
 processor*/
 VTK/
 
+# Files – local
+projectTemplate/**/makeStrokes
+!projectTemplate/design0/makeStrokes
+
 # Folders – local
 projectTemplate/**/postProcessing/
-!projectTemplate/postProcessing/
 projectTemplate/**/stroke_*mm
-projectTemplate/**/makeStrokes
 !projectTemplate/design0/stroke_2mm
-!projectTemplate/design0/makeStrokes

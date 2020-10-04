@@ -34,10 +34,21 @@ cd ${0%/*} || exit 1    # Run from this directory
 
 source ../projectDict
 
+# Set air density
+sed -i "s/rhoInf          1.205/rhoInf          $rhoInf/g"\
+    stroke_2mm/0/p
+sed -i "s/Density, 1.205/Density, $rhoInf/g"\
+    stroke_2mm/system/angularMomentum\
+    stroke_2mm/system/MachNoIncompressible
+
 # Create valve strokes cases
-for (( h = $STROKE_INIT; h <= $STROKE_FINITE; h += $STROKE_STEP ))
+for (( h = $STROKE_INIT; h <= $STROKE_FINITE; h += $STROKE_STEP )) #[mm]
 do
     printf 'Running makeStrokes script on %s\n' "$PWD/stroke_${h}mm"
+
+    # Create varibles converted to metres
+    h_mInit=$(echo "$STROKE_INIT*0.001" | bc)
+    h_m=$(echo "$h*0.001" | bc)
 
     if [ $h -eq $STROKE_INIT ]
     then
@@ -45,6 +56,8 @@ do
         if [ $STROKE_INIT -ne 2 ]
         then
             mv stroke_2mm/ stroke_${STROKE_INIT}mm/
+            sed -i "s/stroke=-0.002/stroke=-0$h_mInit/g"\
+                stroke_${STROKE_INIT}mm/Allmesh
         fi
     else
         # Create stroke folder by copying the initial stroke folder
@@ -52,7 +65,7 @@ do
     fi
 
     # Set stroke variable
-    sed -i "s/stroke=-0.00$STROKE_INIT/stroke=-0.00$h/g" stroke_${h}mm/Allmesh
+    sed -i "s/stroke=-0$h_mInit/stroke=-0$h_m/g" stroke_${h}mm/Allmesh
 done
 
 #------------------------------------------------------------------------------

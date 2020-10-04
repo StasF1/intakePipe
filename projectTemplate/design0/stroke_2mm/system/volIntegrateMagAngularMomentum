@@ -12,8 +12,8 @@ libs            ("libfieldFunctionObjects.so");
 writeControl    none;
 writeFields     false;
 
-// regionType      cellZone;
-// name            <cellZoneName>;
+regionType      cellZone;
+name            <cellZoneName>;
 
 operation       volIntegrate;
 

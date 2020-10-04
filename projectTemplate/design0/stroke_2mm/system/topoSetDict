@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  8
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+actions
+(
+    {
+        name    c1;
+        type    cellZoneSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0 0 -0.01);
+            p2      (0 0 -0.045); // cylinder height is 35 [mm]
+            radius  1;
+        }
+    }
+
+    {
+        name    c2;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0 0 -0.045);
+            p2      (0 0 -0.08);
+            radius  1;
+        }
+    }
+
+    {
+        name    c3;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0 0 -0.08);
+            p2      (0 0 -0.115);
+            radius  1;
+        }
+    }
+
+    {
+        name    c4;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0 0 -0.115);
+            p2      (0 0 -0.150);
+            radius  1;
+        }
+    }
+
+    {
+        name    c0;
+        type    cellSet;
+        action  new;
+        source  cellToCell;
+        sourceInfo { set c1; }
+    }
+    {
+        name    c0;
+        type    cellSet;
+        action  add;
+        source  cellToCell;
+        sourceInfo { set c2; }
+    }
+    {
+        name    c0;
+        type    cellSet;
+        action  add;
+        source  cellToCell;
+        sourceInfo { set c3; }
+    }
+    {
+        name    c0;
+        type    cellSet;
+        action  add;
+        source  cellToCell;
+        sourceInfo { set c4; }
+    }
+);
+
+// ************************************************************************* //

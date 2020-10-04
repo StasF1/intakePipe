@@ -17,7 +17,7 @@ FoamFile
 
 dimensions      [0 0 -1 0 0 0 0];
 
-internalField   uniform 216;
+internalField   uniform 11; // √(k)/PISTON_BORE
 
 boundaryField
 {
@@ -43,7 +43,6 @@ boundaryField
         type            omegaWallFunction;
         value           $internalField;
     }
-
 }
 
 

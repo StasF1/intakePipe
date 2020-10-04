@@ -85,7 +85,7 @@ castellatedMeshControls
         }
     }
 
-    locationInMesh (0.0175 0 -0.0175); // point on the cylnder axle
+    locationInMesh (0.0175 0 -0.0175); // point on the cylinder axle
 
     nCellsBetweenLevels 2;
 }

@@ -33,17 +33,17 @@ cd ${0%/*} || exit 1    # Run from this directory
 
 source projectDict
 
-for (( i = 0; i <= $DESIGN_NO; i++ ))
+for (( n = 0; n <= $DESIGN_NO; n++ ))
 do
     # Clone settings from design0/ folder to every design folder
-    if [ $i -gt 0 ]
+    if [ $n -gt 0 ]
     then
         cp -r design0/stroke_${STROKE_INIT}mm design0/makeStrokes\
-            design$i/
+            design$n/
     fi
 
     # Create strokes
-    design$i/./makeStrokes
+    design$n/./makeStrokes
 done
 
 #------------------------------------------------------------------------------

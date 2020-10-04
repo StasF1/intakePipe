@@ -17,7 +17,7 @@ FoamFile
 
 dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 0.844;
+internalField   uniform 0.85; // 3/2*(U*0.05)^2
 
 boundaryField
 {
@@ -26,18 +26,18 @@ boundaryField
         type            fixedValue;
         value           $internalField;
     }
-    
+
     outlet
     {
         type            zeroGradient;
     }
-    
+
     valve
     {
         type            kqRWallFunction;
         value           $internalField;
     }
-    
+
     walls
     {
         type            kqRWallFunction;
