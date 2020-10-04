@@ -49,7 +49,7 @@ Every stroke will have its own case *projectTemplate/design<i>/stroke_<h>mm/*
 - To calculate specified design only: run a *makeStrokes* script in the
     *design<i>/* and then run the `foamRunTutorials` command.
     Every design folder must have a *stroke_2mm/* parent OpenFOAM case and a
-    *geometry/* folder (with *.stl* files - ).
+    *geometry/* folder (with *.stl* files).
 
 **⚠ In case if you need to recompilate smth**:
 
