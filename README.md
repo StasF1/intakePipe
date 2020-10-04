@@ -14,31 +14,26 @@ The purpose of this template is to create a method for determining the
 characteristics of the intake channels of piston engines using an open
 integrable platform OpenFOAM, which was used to solve the problems described
 above.
-Being a really handy tool, it allows automate the process of manually
-changing the solid model for each valve lift!
+Being a handy tool, it allows automate the process of manually changing
+the solid model for each valve lift!
 
-## Block diagramm of the algorythm
-![blockDiagram](https://github.com/StasF1/intakePipe/wiki/src/images/blockDiagram-0.2.png)
+<!-- ## Block diagramm of the algorythm
+![blockDiagram](https://github.com/StasF1/intakePipe/wiki/src/images/blockDiagram-0.2.png) -->
 
 
 # Requirements
 1. **OpenFOAM** - tested using **v6**, **v7** and **v8**
-1. **Python3** with **NumPy** & **Matplotlib** libraries - tested using Python
-    *v3.7.4* with NumPy *v1.8.0rc1* & Matplotlib *v1.3.1*
+1. **Python3** with [NumPy](https://numpy.org/) and
+    [Matplotlib](https://matplotlib.org/) libraries (- )tested using Python
+    *v3.8.2* with NumPy *v1.18.3* & Matplotlib *v3.2.1*)
 
 
 # Usage
 ## Pre-Process
-- Prepare the pipe geometry and save it as *inlet.stl*, *outlet.stl*,
+- Prepare a pipe geometry and save it as *inlet.stl*, *outlet.stl*,
 *valve.stl*, *walls.stl* at *projectTemplate/design0/geometry/*.
 - Edit OpenFOAM case settings at *projectTemplate/design0/geometry/stroke_2mm/*
     if required.
-- Open ParaView and load the state *swirlNo.pvsm* using ''`Load State...`''
-    from *projectTemplate/postProcessing/swirlNo/*.
-    Select *Swirl number* filter and edit
-    *postProcessing/swirlNo/swirlNoFilter.py* filter path (**must full**!).
-    Save *swirlNo.pvsm* replacing the original one with the
-    ''`Save State...`''.
 
 ## Run
 Directory *projectTemplate/* has got three different versions of the geometry.
@@ -72,25 +67,18 @@ not need to rerun the whole project. So, if you need to recompilate:
     ```
 
 ## Post-process
-### Python 3
+### Jupyter Notebook
 OpenFOAM post-processing functions create a _postProcessing/_ folder with data
 files.
-To initiate calculation flow coeffiecients of intake pipes using .dat files run
-*dischargeCoefficient.py* python script (in the directory
-*projectTemplate/postProcessing/dischargeCoefficient/*) after set geometry
-parameters at *dischargeCoefficientDict.py*.
-It also considers three versions of minimal flow area (from I to III on the
+To initiate calculation intake pipes discharge coefficient using .dat files run
+*dischargeCoefficient.py* run postProcess.ipynb notebook 
+It considers three versions of minimal flow area (from I to III on the
 picture or when it moved to the *d_2* diameter).
 ![valveStep](https://github.com/StasF1/intakePipe/wiki/src/images/valveStep.png)
 
-As a result, there is a graph with discharge coefficient plots for three design
-versions of an intake pipe:
+As a result, there is a swirl numbers graph and a graph with discharge
+coefficient plots for three design versions of an intake pipe:
 ![mu](https://github.com/StasF1/intakePipe/wiki/src/images/mu.png)
-
-### ParaView
-_dischargeCoefficient/postProcessing/swirlNo/_ folder has got a *swirlNo.pvsm*
-ParaView state file when you open it in the ParaView using ''`Load State...`''
-it will calculate swirl numbers in the cylinder automatically.
 
 ---
 ⚠ **In case if you need to make a simulation with another pipe geometry** -
@@ -99,7 +87,7 @@ read [**Wiki**](https://github.com/StasF1/intakePipe/wiki/Home).
 
 # Structure
 ```gitignore
-intakePipe-0.3
+intakePipe-0.4
 └── projectTemplate     # project folder
     ├── design0
     │   ├── stroke_2mm  # default/parent case w/ settings
